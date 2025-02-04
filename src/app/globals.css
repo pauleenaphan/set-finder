@@ -1,4 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;700&family=Rajdhani:wght@400;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --neonBlue: #008CFF;
+    --neonPink: #FF00FF;
+    --darkBg: #0a0a0a;
+
+    --headingFont: 'Rajdhani', sans-serif;
+    --bodyFont: 'Exo 2', sans-serif;
+}
+
+body {
+    font-family: var(--bodyFont);
+    color: #fff;
+}
+
+h1, h2 {
+    font-family: var(--headingFont);
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+*{
+    background-color: var(--darkBg);
+    color: white;
+}
+
+.ctaBtn{
+    font-size: 18px;
+    padding: 10px 20px;
+    border: 3px solid var(--neonBlue);
+    color: var(--neonBlue);
+    background: transparent;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 0 8px var(--neonBlue), 0 0 16px var(--neonBlue);
+    transition: 0.3s;
+}
+
+.ctaBtn:hover{
+    background: var(--neonBlue);
+    color: #000;
+    box-shadow: 0 0 12px var(--neonBlue), 0 0 24px var(--neonBlue);
+}
