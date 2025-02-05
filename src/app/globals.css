@@ -5,9 +5,10 @@
 @tailwind utilities;
 
 :root {
-    --neonBlue: #008CFF;
-    --neonPink: #FF00FF;
-    --darkBg: #0a0a0a;
+    --neonBlue: #005FFF;
+    --neonPink: #FF10F0;
+    --neonHotPinkRed: #ff1f6b;
+    --darkBg: #06001a;
 
     --headingFont: 'Rajdhani', sans-serif;
     --bodyFont: 'Exo 2', sans-serif;
@@ -18,34 +19,59 @@ body {
     color: #fff;
 }
 
-h1, h2 {
+h1, h2, h3, h4, h5 {
     font-family: var(--headingFont);
     font-weight: bold;
     text-transform: capitalize;
 }
 
 *{
-    background-color: var(--darkBg);
     color: white;
+}
+
+body{
+    background-color: var(--darkBg);
 }
 
 .ctaBtn{
     font-size: 18px;
     padding: 10px 20px;
-    border: 3px solid var(--neonBlue);
-    color: var(--neonBlue);
+    border: 3px solid var(--neonHotPinkRed);
+    color: var(--neonHotPinkRed);
     background: transparent;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 2px;
     cursor: pointer;
-    border-radius: 8px;
-    box-shadow: 0 0 8px var(--neonBlue), 0 0 16px var(--neonBlue);
+    border-radius: 10px;
+    box-shadow: 0 0 8px var(--neonHotPinkRed), 0 0 16px var(--neonHotPinkRed);
     transition: 0.3s;
 }
 
 .ctaBtn:hover{
-    background: var(--neonBlue);
+    background: var(--neonHotPinkRed);
     color: #000;
-    box-shadow: 0 0 12px var(--neonBlue), 0 0 24px var(--neonBlue);
+    box-shadow: 0 0 12px var(--neonHotPinkRed), 0 0 24px var(--neonHotPinkRed);
 }
+
+/* Kandi Beads */
+.coloredBead{
+    min-width: 90px;
+    min-height: 90px;
+    border-radius: 20px;
+}
+
+.letterBead{
+    font-size: 50px;
+    border: 2px solid rgb(19, 19, 19);
+    border-radius: 20px;
+    font-weight: bold;
+    min-width: 100px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+

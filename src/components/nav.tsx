@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
@@ -10,15 +11,15 @@ export default function Nav(){
     const [inputSet, setInputSet] = useState<string>("");
 
     return(
-        <nav className="flex justify-between px-12 py-8 items-center gap-32 mb-12">
-            <div className=" w-[15%]">
+        <nav className="flex justify-between px-12 py-8 items-center gap-32 mb-32">
+            <Link href="/" className=" w-[20%]" >
                 <h1> Set-Finder Logo Here</h1>
-            </div>
+            </Link>
             
 
             <div className="flex w-[35%] relative text-lg">
                 <input type="text" placeholder="Search for Set" onChange={(e) =>{setInputSet(e.target.value)}} required
-                    className="p-2 px-5 rounded-3xl w-full border-2 border-white"
+                    className="p-2 px-5 rounded-3xl w-full border-2 border-white bg-bgColor"
                 ></input>
                 <button onClick={() =>{ router.push(`/liveSet?setName=${encodeURIComponent(inputSet)}`)}} 
                     className="absolute right-5 top-1/2 transform -translate-y-1/2">
@@ -27,9 +28,9 @@ export default function Nav(){
             </div>
             
             <div className="flex gap-8 text-lg items-center tracking-[2px]">
-                <a> EXPLORE </a>
-                <a> LIBRARY </a>
-                <a className="ctaBtn"> SIGN UP </a> {/* If user is logged in then change to account */}
+                <Link href="/explore" className="hover:opacity-60"> EXPLORE </Link>
+                <Link href="/library" className="hover:opacity-60"> LIBRARY </Link>
+                <Link href="/auth/signup" className="ctaBtn"> SIGN UP </Link> {/* If user is logged in then change to account */}
             </div>
             
         </nav>

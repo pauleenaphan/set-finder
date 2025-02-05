@@ -1,5 +1,21 @@
 import { getToken } from "./getToken";
 
+function formatDate(rawDate) {
+    const dateObj = new Date(rawDate);
+
+    return dateObj.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "short", // abbreviated month name (Jan, Feb, Mar, ...)
+        day: "numeric"
+    });
+}
+
+const upscaleImage = (url) => {
+    // Assuming the URL is: https://i1.sndcdn.com/artworks-KwxyC70uiDfSwHn9-gvqplQ-large.jpg
+    // Transform the image quality without needing the API key or secret
+    return url.replace('-large', '-f_auto,q_auto,w_1000');
+};
+
 // Returns final list of live sets
 export const fetchSets = async(setName) =>{
     // Checks if artist exist in edm base 
@@ -116,15 +132,15 @@ export const fetchSets = async(setName) =>{
 // find live sets from soundcloud
 const getSoundCloudSets = async(setName) =>{
     console.log("client id", process.env.NEXT_PUBLIC_SOUNDCLOUD_ID);
-    // const oauthToken = await getToken(); 
-    // console.log("oauthtoken", oauthToken);
+    const oauthToken = await getToken(); 
+    console.log("oauthtoken", oauthToken);
 
     try{
         const response = await fetch(`https://api.soundcloud.com/tracks?q=${setName}&limit=5`, {
             method: 'GET',
             headers: {
                 // 'Authorization': `Bearer ${oauthToken}`,  
-                'Authorization': "Bearer 2-298700--yaStNcgbskqKgju0744zwOf"
+                'Authorization': "Bearer 2-298700--Krpl5xXImG1hvo4lCbNsBMM"
             },
 
         });
@@ -135,7 +151,14 @@ const getSoundCloudSets = async(setName) =>{
         let setResults = [];
 
         for(let i = 0; i < data.length; i++){
-            setResults[i] = ["sc", data[i].id, data[i].title, data[i].created_at, data[i].permalink_url, data[i].artwork_url]
+            setResults[i] = [
+                "sc", 
+                data[i].id, 
+                data[i].title, 
+                formatDate(data[i].created_at), 
+                data[i].permalink_url, 
+                upscaleImage(data[i].artwork_url)
+            ]
         }
 
         return setResults;
@@ -160,9 +183,10 @@ const getYoutubeSets = async(setName) =>{
                 "yt", 
                 data.items[i].id.videoId, 
                 data.items[i].snippet.title, 
-                data.items[i].snippet.publishedAt, 
+                formatDate(data.items[i].snippet.publishedAt), 
                 `https://www.youtube.com/watch?v=${data.items[i].id.videoId}`,
-                data.items[i].snippet.thumbnails.default
+                // Check if a max resolution for thumbnail exist, if not use the high res
+                data.items[i].snippet.thumbnails.maxres ? data.items[i].snippet.thumbnails.maxres.url : data.items[i].snippet.thumbnails.high.url
             ]
         }
 

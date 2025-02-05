@@ -28,6 +28,8 @@ export async function POST(req) {
         if (response.ok) {
             return new Response(JSON.stringify(data), { status: 200 }); // Return the token
         } else {
+            console.error("SoundCloud API Error - Status:", response.status);
+            console.error("SoundCloud API Error - Data:", data);
             return new Response(JSON.stringify({ error: 'Failed to get token' }), { status: 400 });
         }
     } catch (error) {

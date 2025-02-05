@@ -1,0 +1,16 @@
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inputLabel{
+    letter-spacing: 2px;
+}
+
+.inputField{
+    background-color: var(--darkBg);
+    border: 2px solid white;
+    padding: 20px;
+    border-radius: 10px;
+}
