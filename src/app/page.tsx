@@ -10,7 +10,7 @@ import "../app/styles/home.css";
 export default function Home() {
   return (
     <main className="flex flex-col gap-60 mb-60">
-        <section className="mt-32">
+        <section className="mt-[3%]">
           <div className="flex gap-1 items-center justify-center overflow-x-hidden mb-10">
             <div className="coloredBead bg-yellow-400"></div>
             <div className="coloredBead bg-pink-400"></div>
@@ -41,17 +41,18 @@ export default function Home() {
             <div className="coloredBead bg-green-400"></div>
             <div className="coloredBead bg-blue-400 "></div>
           </div>
-          <div className="flex gap-5 justify-center items-center">
-            <p className="text-3xl"> Missed a set? Come find it! </p>
-            <Link href="/explore"
-              className="ctaBtn"
-            > Discover Sets </Link>
+          <div className="flex gap-5 justify-center items-center  flex-col">
+            <p className="text-3xl text-gray-300 w-1/2 text-center mb-8"> 
+              Missed a set? Come find it! A dedicated platform for 
+              discovering live EDM sets from YouTube and SoundCloud—all in one place.
+            </p>
+            <Link href="/explore" className="ctaBtn"> Discover Sets </Link>
           </div>
         </section>
 
-        <section className="w-2/3 mx-auto">
+        {/* <section className="w-2/3 mx-auto">
           <h1 className="text-center text-5xl mb-8 tracking-wider text-neonBlue"> ABOUT US </h1>
-          <p className="text-2xl"> 
+          <p className="text-2xl text-gray-300"> 
             Set Finder is a dedicated platform for discovering live EDM sets. We know how 
             frustrating it can be to track down sets scattered across different platforms. 
             With Set Finder, you can keep all your favorite sets in one place, making it easier 
@@ -59,10 +60,10 @@ export default function Home() {
             said no? No worries—find the set and experience the moment through the eyes of 
             someone who was there.
           </p>
-        </section>
+        </section> */}
 
-        <section className="w-2/3 mx-auto"> 
-          <h2 className="text-center text-5xl mb-8 tracking-wider text-neonBlue"> FEATURES </h2>
+        {/* <section className="w-2/3 mx-auto"> 
+          <h2 className="text-center text-5xl mb-8 tracking-wider text-neonBlue"> OUR FEATURES </h2>
           <div className="flex gap-10">
             <article className="homeCard">
               <p className="text-2xl font-bold"> Create Playlist </p>
@@ -80,7 +81,7 @@ export default function Home() {
               <p className="text-lg"> Explore new EDM sets and expand your collection </p>
             </article>
           </div>
-        </section>
+        </section> */}
     </main>
   );
 }

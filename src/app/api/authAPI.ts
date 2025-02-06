@@ -1,8 +1,9 @@
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, UserCredential, AuthError } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, UserCredential, AuthError, signOut } from "firebase/auth";
 import { auth, googleProvider, db } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 import { SignUpResponse, SignInResponse, GoogleSignInResponse } from "@/types/authTypes";
+import firebase from "firebase/compat/app";
 
 // Signing up without Google 
 export const signUpWithoutGoogle = async (email: string, password: string): Promise<SignUpResponse> => {
@@ -14,6 +15,7 @@ export const signUpWithoutGoogle = async (email: string, password: string): Prom
             email: email,
         });
 
+        localStorage.setItem("setFinderIsLogged", "true");
         return { success: true };
     } catch (error: unknown) {
         const err = error as AuthError; // Assert error as AuthError type
@@ -41,6 +43,7 @@ export const signInWithoutGoogle = async (email: string, password: string): Prom
             email: email,
         });
 
+        localStorage.setItem("setFinderIsLogged", "true");
         return { success: true };
     } catch (error: unknown) {
         const err = error as AuthError; // Assert error as AuthError type
@@ -65,10 +68,21 @@ export const signUpOrInWithGoogle = async (): Promise<GoogleSignInResponse> => {
             email: user.email,
         });
 
+        localStorage.setItem("setFinderIsLogged", "true");
         return { success: true };
     } catch (error: unknown) {
         const err = error as AuthError; // Assert error as AuthError type
         console.error("Error signing in with Google", err);
         return { success: false, error: err.message };
+    }
+}
+
+export const logoutUser = async () =>{
+    try{
+        await signOut(auth);
+        localStorage.setItem("setFinderIsLogged", "false");
+        console.log("user has signed out");
+    }catch(error){
+        console.error("Error logging user out", error);
     }
 }

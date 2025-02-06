@@ -26,7 +26,7 @@ export default function library(){
     }
 
     return(
-        <main className="mb-40 w-2/3 mx-auto">
+        <main className="mb-40 w-4/5 mx-auto">
             <div className="flex gap-10 text-3xl mb-10 font-bold">
             <button
                 onClick={() => setCurrTab("likes")}

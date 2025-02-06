@@ -84,36 +84,33 @@ export default function liveSets() {
 
     if(authLoading || loading){
         return( 
-            <div> Loading... </div>
+            <div className="w-4/5 mx-auto text-xl"> Loading Results... </div>
         )
     }
 
     return (
-        <div className="px-12">
+        <div className="w-4/5 mx-auto">
             <h1 className="text-3xl"> Results For: {setName} </h1>
             <div className="flex gap-8 flex-wrap my-10">
                 {(setResults || []).length > 0 ? (
                     setResults.map((set: SetData, index: number) => (
                         <div key={index} 
-                            className="border-2 border-white w-1/3 flex flex-col gap-5 p-5">
+                            className="border-2 border-cardBg bg-black rounded-xl w-1/3 flex flex-col gap-5 p-5">
                             <img src={set.platforms[0].thumbnail} alt="Platform Thumbnail" 
                                 className="w-full"
                             />
-                            <p className="text-bold text-xl"> {set.title} </p>
+                            <p className="font-bold text-xl"> {set.title} </p>
                             {/* Loops through each platform */}
                             {set.platforms.map((platform, pIndex) => (
-                                <div key={pIndex} 
-                                    className="flex items-center gap-3 text-lg">
-                                    {platform.platform == "yt" ? (
-                                        <a href={platform.link}>
-                                            <ImYoutube/> 
-                                        </a>
-                                    ) : (
-                                        <a href={platform.link}>
-                                            <ImSoundcloud2/>
-                                        </a>
-                                    )}
-                                    <p> Posted: {platform.publishedDate} </p>
+                                <div key={pIndex} className="text-lg hover:underline">
+                                    <a href={platform.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                                        {platform.platform === "yt" ? (
+                                            <ImYoutube className="text-2xl text-red-500" />
+                                        ) : (
+                                            <ImSoundcloud2 className="text-2xl text-orange-500" />
+                                        )}
+                                        <p>Posted: {platform.publishedDate}</p>
+                                    </a>
                                 </div>
                             ))}
                             <div className="flex justify-end">

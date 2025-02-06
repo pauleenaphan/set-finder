@@ -19,20 +19,29 @@ export default function LoginForm() {
 
     const [errorMsg, setErrorMsg] = useState<string>("");
 
-    const signInWithEmail = async (e: React.FormEvent<HTMLFormElement>) =>{
-        e.preventDefault();
-        const results = await signInWithoutGoogle(email, password);
-        (results.success ? router.push("/explore") : setErrorMsg(results.error));
-    }
+    const signIn = async(platform: string) =>{
+        let results;
 
-    const signInWithGoogle = async () =>{
-        const results = await signUpOrInWithGoogle();
-        (results.success ? router.push("/explore") : setErrorMsg(results.error));
+        if(platform == "email"){
+            results = await signInWithoutGoogle(email, password);
+        }else{
+            results = await signUpOrInWithGoogle();
+        }
+
+        if(results.success){
+            router.push("/explore");
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 150); 
+        }else{
+            setErrorMsg(results.error as string);
+        }
     }
 
     return (
         <main className="mb-40">
-            <form onSubmit={signInWithEmail}
+            <form onSubmit={() => { signIn("email") }}
                 className="flex flex-col gap-10 w-1/3 mx-auto">
                 <h1 className="text-5xl text-neonBlue text-center"> Welcome Back!</h1>
                 <div className="inputContainer">
@@ -65,7 +74,7 @@ export default function LoginForm() {
                 <button type="submit" className="ctaBtn"> Login </button>
             </form>
 
-            <article onClick={signInWithGoogle}
+            <article onClick={() =>{ signIn("google") }}
                 className="inputField w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
                 <FcGoogle className="text-2xl"/>
                 <button className="text-xl"> Sign in with Google </button>

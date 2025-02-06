@@ -15,8 +15,8 @@ export default {
         neonGreen: "#39FF14",  
         neonOrange: "#FF6700",  
         neonPurple: "#9D00FF", 
-        neonHotPinkRed: '#ff1f6b',
-
+        neonHotPinkRed: "#ff1f6b",
+        cardBg: "#131313"
       },
     },
   },

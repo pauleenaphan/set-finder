@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
 import { useState } from "react";
+
 import "../../styles/auth.css";
 
 import { FcGoogle } from "react-icons/fc";
@@ -19,28 +20,29 @@ export default function SignupForm() {
 
     const [errorMsg, setErrorMsg] = useState<string>("");
 
-    const signUpWithEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
+    const signUp = async(platform: string) =>{
+        let results;
 
-        if(password != confirmPassword){
-            setErrorMsg("Passwords don't match");
+        if(platform == "email"){
+            results = await signUpWithoutGoogle(email, password);
+        }else{
+            results = await signUpOrInWithGoogle();
         }
-        const results = await signUpWithoutGoogle(email, password);
-        (results.success ? router.push("/explore") : setErrorMsg(results.error));
-    };
 
-    const signUpWithGoogle = async () =>{
-        if(password != confirmPassword){
-            setErrorMsg("Passwords don't match");
+        if(results.success){
+            router.push("/explore");
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 150); 
+        }else{
+            setErrorMsg(results.error as string);
         }
-        
-        const results = await signUpOrInWithGoogle();
-        (results.success ? router.push("/explore") : setErrorMsg(results.error));
     }
 
     return (
         <main className="mb-40">
-            <form onSubmit={signUpWithEmail} className="flex flex-col gap-10 w-1/3 mx-auto">
+            <form onSubmit={() =>{ signUp("email") }} className="flex flex-col gap-10 w-1/3 mx-auto">
                 <h1 className="text-5xl text-neonBlue text-center"> Welcome to Setfinder! </h1>
                 <div className="inputContainer">
                     <label htmlFor="email" className="inputLabel">EMAIL:</label>
@@ -88,7 +90,7 @@ export default function SignupForm() {
                 <button type="submit" className="ctaBtn"> Sign Up </button>
             </form> 
 
-            <article onClick={signUpWithGoogle}
+            <article onClick={() =>{ signUp("google") }}
                 className="inputField w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
                 <FcGoogle className="text-2xl"/>
                 <button className="text-xl"> Sign Up with Google </button>

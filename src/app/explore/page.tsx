@@ -1,6 +1,6 @@
 export default function explore(){
     return(
-        <main className="mb-40 w-2/3 mx-auto flex gap-40 flex-col">
+        <main className="mb-40 w-4/5 mx-auto flex gap-40 flex-col">
             <section>
                 <h1 className="text-neonBlue text-3xl tracking-wider"> TRENDING SETS  </h1> 
                 <p> Loading sets... </p> 
