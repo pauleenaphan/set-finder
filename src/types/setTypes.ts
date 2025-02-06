@@ -16,3 +16,8 @@ export type SetData = {
     title: string;
     platforms: PlatformData[];
 };
+
+export interface LikeParams {
+    setId: string;
+    userUid: string;
+}

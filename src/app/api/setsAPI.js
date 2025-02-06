@@ -1,4 +1,4 @@
-import { getToken } from "./getToken";
+import { getOauth } from "./tokenAPI";
 
 function formatDate(rawDate) {
     const dateObj = new Date(rawDate);
@@ -32,16 +32,18 @@ export const fetchSets = async(setName) =>{
     console.log(setName);
 
     // gets set from soundcloud
-    let scSets = await getSoundCloudSets(setName);
+    // let scSets = await getSoundCloudSets(setName);
     let ytSets = await getYoutubeSets(setName);
 
     // [platform (yt or sc), id, title of set, published date, link to set, thumbnail]
-    console.log("scsets", scSets);
+    // console.log("scsets", scSets);
     console.log("ytsets", ytSets);
 
     let listOfSets = [];
 
-    const maxLen = scSets.length + ytSets.length;
+    // const maxLen = scSets.length + ytSets.length;
+    const maxLen = 5;
+    let scSets = [];
 
     // Loops through listOfSets to see if title exists yet
     const findSetByTitle = (title) => {
@@ -132,15 +134,14 @@ export const fetchSets = async(setName) =>{
 // find live sets from soundcloud
 const getSoundCloudSets = async(setName) =>{
     console.log("client id", process.env.NEXT_PUBLIC_SOUNDCLOUD_ID);
-    const oauthToken = await getToken(); 
+    const oauthToken = await getOauth(); 
     console.log("oauthtoken", oauthToken);
 
     try{
         const response = await fetch(`https://api.soundcloud.com/tracks?q=${setName}&limit=1`, {
             method: 'GET',
             headers: {
-                // 'Authorization': `Bearer ${oauthToken}`,  
-                'Authorization': "Bearer 2-298700--Krpl5xXImG1hvo4lCbNsBMM"
+                'Authorization': `Bearer ${oauthToken}`,  
             },
 
         });

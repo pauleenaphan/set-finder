@@ -9,7 +9,7 @@ import "../../styles/auth.css";
 
 import { FcGoogle } from "react-icons/fc";
 
-import { signInWithoutGoogle, signUpOrInWithGoogle } from "../../api/utils/auth";
+import { signInWithoutGoogle, signUpOrInWithGoogle } from "../../api/authAPI";
 
 export default function LoginForm() {
     const router = useRouter();
@@ -44,6 +44,7 @@ export default function LoginForm() {
                         onChange={(e) => setEmail(e.target.value)}
                         className="inputField"
                         placeholder="Enter your email"
+                        autoComplete="email"
                     />
                 </div>
                 
@@ -56,6 +57,7 @@ export default function LoginForm() {
                         onChange={(e) => setPassword(e.target.value)}
                         className="inputField"
                         placeholder="Enter your password"
+                        autoComplete="current-password"
                     />
                 </div>
                 

@@ -8,7 +8,7 @@ import "../../styles/auth.css";
 
 import { FcGoogle } from "react-icons/fc";
 
-import { signUpWithoutGoogle, signUpOrInWithGoogle } from "../../api/utils/auth";
+import { signUpWithoutGoogle, signUpOrInWithGoogle } from "../../api/authAPI";
 
 export default function SignupForm() {
     const router = useRouter();
@@ -52,6 +52,7 @@ export default function SignupForm() {
                         className="inputField"
                         placeholder="Enter your email"
                         required
+                        autoComplete="email"
                     />
                 </div>
 
@@ -65,6 +66,7 @@ export default function SignupForm() {
                         className={`inputField ${password !== confirmPassword ? 'inputFieldInCorrect' : ''}`}
                         placeholder="Create a strong password"
                         required
+                        autoComplete="new-password"
                     />
                 </div>
 
@@ -78,6 +80,7 @@ export default function SignupForm() {
                         className={`inputField ${password !== confirmPassword ? 'inputFieldInCorrect' : ''}`}
                         placeholder="Re-enter your password"
                         required
+                        autoComplete="new-password"
                     />
                 </div>
                 
