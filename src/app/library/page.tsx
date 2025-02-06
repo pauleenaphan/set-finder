@@ -1,9 +1,30 @@
 "use client"
 
-import { useState } from "react"
+import { useEffect, useState } from "react";
+
+import { getLikes } from "../api/likesAPI";
+import { useAuth } from "../utils/fbAuth";
 
 export default function library(){
     const [currTab, setCurrTab] = useState<string>("likes");
+    const [userLikes, setUserLikes] = useState<string>(""); // temp string for now
+
+    const { user, loading: authLoading } = useAuth(); 
+
+    useEffect(() =>{
+        if(currTab == "likes"){
+            if(user){
+                getLikes(user.uid);
+            }
+        }
+    }, [currTab, user])
+
+    if(authLoading){
+        return( 
+            <div> Loading... </div>
+        )
+    }
+
     return(
         <main className="mb-40 w-2/3 mx-auto">
             <div className="flex gap-10 text-3xl mb-10 font-bold">
@@ -21,9 +42,9 @@ export default function library(){
             </button>
             </div>
             {currTab === "likes" ? (
-            <p>Displaying likes</p>
+                <p>Displaying likes</p>
             ) : (
-            <p>Displaying Playlist</p>
+                <p>Displaying Playlist</p>
             )}
         </main>
     )

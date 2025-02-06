@@ -1,10 +1,14 @@
 "use client";
 import Link from "next/link";
+import Image from 'next/image';
 
 import { useState } from "react";
 import { useRouter } from 'next/navigation';
 
 import { IoSearch } from "react-icons/io5";
+
+import logo from "../assets/setfinderLogo.png";
+import logo2 from "../assets/setfinderLogo2.png";
 
 export default function Nav(){
     const router = useRouter();
@@ -13,7 +17,7 @@ export default function Nav(){
     return(
         <nav className="flex justify-between px-12 py-8 items-center gap-32 mb-32">
             <Link href="/" className=" w-[20%]" >
-                <h1> Set-Finder Logo Here</h1>
+                <Image src={logo2} alt="setfinder logo" className=""/>
             </Link>
             
 

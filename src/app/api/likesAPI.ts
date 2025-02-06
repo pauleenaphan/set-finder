@@ -1,4 +1,4 @@
-import { deleteDoc, addDoc, collection, doc, getDoc, setDoc } from "firebase/firestore";
+import { deleteDoc, addDoc, collection, doc, getDoc, setDoc, getDocs } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { LikeParams } from "@/types/setTypes";
 
@@ -11,7 +11,7 @@ export const addLike = async  (setId: string, userUid: string) => {
         await setDoc(doc(db, "users", userUid, "likes", setId), {
             liked: true,
         });
-        
+
         console.log(setId, "has been liked");
     } catch (error: unknown) {
         const err = error as AuthError; // Assert error as AuthError type
@@ -32,8 +32,18 @@ export const removeLike = async  (setId: string, userUid: string) => {
 };
 
 // Get the likes (empty implementation for now)
-export const getLikes = async (): Promise<void> => {
+export const getLikes = async (userUid: string) => {
+    let listOfLikes: string[] = [];
     // grab list of id from firebase
+    const likes = await getDocs(collection(db, "users", userUid, "likes"));
+
+    likes.forEach((doc) =>{
+        listOfLikes.push(doc.id);
+    })
+
+    console.log("list of likes", listOfLikes);
+    return listOfLikes;
+    
     // input id into yt and sc api
     // yt and sc api display liked sets
 };
