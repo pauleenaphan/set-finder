@@ -136,7 +136,7 @@ const getSoundCloudSets = async(setName) =>{
     console.log("oauthtoken", oauthToken);
 
     try{
-        const response = await fetch(`https://api.soundcloud.com/tracks?q=${setName}&limit=5`, {
+        const response = await fetch(`https://api.soundcloud.com/tracks?q=${setName}&limit=1`, {
             method: 'GET',
             headers: {
                 // 'Authorization': `Bearer ${oauthToken}`,  
@@ -170,7 +170,7 @@ const getSoundCloudSets = async(setName) =>{
 
 const getYoutubeSets = async(setName) =>{
     try{
-        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=5&q=${encodeURIComponent(setName)}&key=${process.env.NEXT_PUBLIC_YT_API_KEY}`)
+        const response = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=1&q=${encodeURIComponent(setName)}&key=${process.env.NEXT_PUBLIC_YT_API_KEY}`)
 
         const data = await response.json();
 

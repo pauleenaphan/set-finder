@@ -10,7 +10,11 @@
 
 .inputField{
     background-color: var(--darkBg);
-    border: 2px solid white;
+    border: 2px solid rgb(126, 126, 126);
     padding: 20px;
     border-radius: 10px;
+}
+
+.inputFieldInCorrect{
+    border: 2px solid rgb(163, 7, 7);
 }

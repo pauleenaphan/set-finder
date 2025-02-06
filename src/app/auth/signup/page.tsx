@@ -1,24 +1,47 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from 'next/navigation';
+
 import { useState } from "react";
 import "../../styles/auth.css";
 
-export default function SignupForm() {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+import { FcGoogle } from "react-icons/fc";
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+import { signUpWithoutGoogle, signUpOrInWithGoogle } from "../../api/utils/auth";
+
+export default function SignupForm() {
+    const router = useRouter();
+
+    const [email, setEmail] = useState<string>("");
+    const [password, setPassword] = useState<string>("");
+    const [confirmPassword, setConfirmPassword] = useState<string>("");
+
+    const [errorMsg, setErrorMsg] = useState<string>("");
+
+    const signUpWithEmail = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log({ email, password, confirmPassword }); // Handle signup logic here
+
+        if(password != confirmPassword){
+            setErrorMsg("Passwords don't match");
+        }
+        const results = await signUpWithoutGoogle(email, password);
+        (results.success ? router.push("/explore") : setErrorMsg(results.error));
     };
+
+    const signUpWithGoogle = async () =>{
+        if(password != confirmPassword){
+            setErrorMsg("Passwords don't match");
+        }
+        
+        const results = await signUpOrInWithGoogle();
+        (results.success ? router.push("/explore") : setErrorMsg(results.error));
+    }
 
     return (
         <main className="mb-40">
-            <form onSubmit={handleSubmit} className="flex flex-col gap-10 w-1/3 mx-auto">
+            <form onSubmit={signUpWithEmail} className="flex flex-col gap-10 w-1/3 mx-auto">
                 <h1 className="text-5xl text-neonBlue text-center"> Welcome to Setfinder! </h1>
-                
                 <div className="inputContainer">
                     <label htmlFor="email" className="inputLabel">EMAIL:</label>
                     <input
@@ -28,6 +51,7 @@ export default function SignupForm() {
                         onChange={(e) => setEmail(e.target.value)}
                         className="inputField"
                         placeholder="Enter your email"
+                        required
                     />
                 </div>
 
@@ -38,8 +62,9 @@ export default function SignupForm() {
                         id="password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        className="inputField"
+                        className={`inputField ${password !== confirmPassword ? 'inputFieldInCorrect' : ''}`}
                         placeholder="Create a strong password"
+                        required
                     />
                 </div>
 
@@ -50,17 +75,26 @@ export default function SignupForm() {
                         id="confirmPassword"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="inputField"
+                        className={`inputField ${password !== confirmPassword ? 'inputFieldInCorrect' : ''}`}
                         placeholder="Re-enter your password"
+                        required
                     />
                 </div>
-
+                
+                {errorMsg && <p className="text-red-500">{errorMsg}</p>}
                 <button type="submit" className="ctaBtn"> Sign Up </button>
-                <div className="flex gap-5 justify-center">
-                    <p> Already have an account? </p> 
-                    <Link href="/auth/login" className="underline"> Login </Link>
-                </div>
-            </form>
+            </form> 
+
+            <article onClick={signUpWithGoogle}
+                className="inputField w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
+                <FcGoogle className="text-2xl"/>
+                <button className="text-xl"> Sign Up with Google </button>
+            </article>
+            
+            <article className="flex gap-5 justify-center">
+                <p> Already have an account? </p> 
+                <Link href="/auth/login" className="underline"> Login </Link>
+            </article>
         </main>
     );
 }
