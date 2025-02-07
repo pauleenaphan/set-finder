@@ -33,7 +33,7 @@ export default function LoginForm() {
 
             setTimeout(() => {
                 window.location.reload();
-            }, 150); 
+            }, 200); 
         }else{
             setErrorMsg(results.error as string);
         }

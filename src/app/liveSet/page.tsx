@@ -6,15 +6,12 @@ import { useSearchParams } from 'next/navigation';
 import "../styles/sets.css";
 
 import { fetchSets } from "../api/setsAPI";
-import { PlatformData, SetData } from '@/types/setTypes';
+import { SetData } from '@/types/setTypes';
 
 import { checkLike, removeLike, addLike } from "../api/likesAPI";
 import { useAuth } from "../utils/fbAuth";
 
-import { ImSoundcloud2 } from "react-icons/im";
-import { ImYoutube } from "react-icons/im";
-import { FaRegHeart } from "react-icons/fa";
-import { FaHeart } from "react-icons/fa";
+import SetList from '@/components/setCards';
 
 export default function liveSets() {
     const searchParams = useSearchParams();
@@ -92,41 +89,12 @@ export default function liveSets() {
         <div className="w-4/5 mx-auto">
             <h1 className="text-3xl"> Results For: {setName} </h1>
             <div className="flex gap-8 flex-wrap my-10">
-                {(setResults || []).length > 0 ? (
-                    setResults.map((set: SetData, index: number) => (
-                        <div key={index} 
-                            className="border-2 border-cardBg bg-black rounded-xl w-1/3 flex flex-col gap-5 p-5">
-                            <img src={set.platforms[0].thumbnail} alt="Platform Thumbnail" 
-                                className="w-full"
-                            />
-                            <p className="font-bold text-xl"> {set.title} </p>
-                            {/* Loops through each platform */}
-                            {set.platforms.map((platform, pIndex) => (
-                                <div key={pIndex} className="text-lg hover:underline">
-                                    <a href={platform.link} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                                        {platform.platform === "yt" ? (
-                                            <ImYoutube className="text-2xl text-red-500" />
-                                        ) : (
-                                            <ImSoundcloud2 className="text-2xl text-orange-500" />
-                                        )}
-                                        <p>Posted: {platform.publishedDate}</p>
-                                    </a>
-                                </div>
-                            ))}
-                            <div className="flex justify-end">
-                                {likedSets[set.platforms[0].id] ? (
-                                    <FaHeart className="text-3xl cursor-pointer text-pink-500" 
-                                        onClick={() => handleLikeStatus(set.platforms[0].id, true)} />
-                                ) : (
-                                    <FaRegHeart className="text-3xl cursor-pointer hover:text-pink-500" 
-                                        onClick={() => handleLikeStatus(set.platforms[0].id, false)} />
-                                )}
-                            </div>
-                        </div>
-                    ))
-                ) : (
-                    <p> Loading Results...</p>
-                )}
+                <SetList
+                    status="searchResults"
+                    setResults={setResults}
+                    likedSets={likedSets}
+                    handleLikeStatus={handleLikeStatus}
+                />
             </div>
         </div>
     );

@@ -13,7 +13,7 @@ export default function account() {
         // Reload the page after navigation is initiated
         setTimeout(() => {
             window.location.reload();
-        }, 150); // Small delay to ensure router push happens first
+        }, 200); // Small delay to ensure router push happens first
     };
 
 

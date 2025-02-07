@@ -1,14 +1,15 @@
 import { deleteDoc, addDoc, collection, doc, getDoc, setDoc, getDocs } from "firebase/firestore";
 import { auth, db } from "./firebase";
 import { LikeParams } from "@/types/setTypes";
+import { getSoundCloudSets, getYoutubeSets } from "../api/setsAPI";
 
 // Define the error type for Firebase errors
 import { AuthError } from "firebase/auth";
 
-// Add a like for a set
+// Add like into firebase if user likes a set
 export const addLike = async  (setId: string, userUid: string) => {
     try {
-        await setDoc(doc(db, "users", userUid, "likes", setId), {
+        await setDoc(doc(db, "users", userUid, "likes", String(setId)), {
             liked: true,
         });
 
@@ -19,7 +20,7 @@ export const addLike = async  (setId: string, userUid: string) => {
     }
 };
 
-// Remove a like for a set
+// Remove like from firebase is user dislikes a set
 export const removeLike = async  (setId: string, userUid: string) => {
     try {
         await deleteDoc(doc(db, "users", userUid, "likes", setId));
@@ -31,29 +32,38 @@ export const removeLike = async  (setId: string, userUid: string) => {
     }
 };
 
-// Get the likes (empty implementation for now)
+// Display users likes
 export const getLikes = async (userUid: string) => {
-    let listOfLikes: string[] = [];
     // grab list of id from firebase
     const likes = await getDocs(collection(db, "users", userUid, "likes"));
 
-    likes.forEach((doc) =>{
-        listOfLikes.push(doc.id);
-    })
+    let scList: string[] = [];
+    let ytList: string[] = [];
 
-    console.log("list of likes", listOfLikes);
-    return listOfLikes;
+    // Process likes in one loop
+    likes.forEach((doc) => {
+        const id = doc.id;
+        (id.length === 10 ? scList : ytList).push(id);
+    });
+
+    let scSets = await getSoundCloudSets(scList); // Await the result of the SoundCloud fetch
+    let ytSets = await getYoutubeSets(ytList);    // Await the result of the YouTube fetch
+
+    let combinedSets = scSets.concat(ytSets);  
+
+    console.log("getting likes", combinedSets);
+    // return listOfLikes;
+
+    return combinedSets;
     
-    // input id into yt and sc api
-    // yt and sc api display liked sets
 };
 
-// Check if the user likes a particular set
+// Check if the user likes a particular set to load a liked set
 export const checkLike = async (setId: string, userUid: string) => {
-    console.log("curr useruid", userUid, " set id", setId);
+    console.log("setId type:", typeof setId, "userUid type:", typeof userUid);
 
     try {
-        const docRef = doc(db, "users", userUid, "likes", setId);
+        const docRef = doc(db, "users", userUid, "likes", String(setId));
         const docSnapshot = await getDoc(docRef);
 
         return docSnapshot.exists();

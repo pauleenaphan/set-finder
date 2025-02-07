@@ -34,7 +34,7 @@ export default function SignupForm() {
 
             setTimeout(() => {
                 window.location.reload();
-            }, 150); 
+            }, 300); 
         }else{
             setErrorMsg(results.error as string);
         }
