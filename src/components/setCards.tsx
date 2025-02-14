@@ -3,16 +3,16 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { ImYoutube, ImSoundcloud2 } from 'react-icons/im';
 import { SetData, UserLikesParam, SetListProps } from '@/types/setTypes';
 
-const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handleLikeStatus }) => {
+const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handleLikeStatus, style }) => {
   return (
-    <div className="flex gap-8 flex-row flex-wrap my-10">
+    <div className={`my-10 ${style}`}>
       {status === 'searchResults' ? (
         // TypeScript now understands that setResults is SetData[] when status is "searchResults"
         (setResults as SetData[]).length > 0 ? (
           (setResults as SetData[]).map((set: SetData, index: number) => (
             <div
               key={index}
-              className="border-2 border-cardBg bg-black rounded-xl w-1/3 flex flex-col gap-5 p-5"
+              className="bg-[#1e1a33] rounded-lg shadow-xl rounded-lg w-1/4 flex flex-col gap-5 p-5"
             >
               <img
                 src={set.platforms[0].thumbnail}
@@ -61,7 +61,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as UserLikesParam[]).map((set: UserLikesParam, index: number) => (
             <div
               key={index}
-              className="border-2 border-cardBg bg-black rounded-xl w-1/3 flex flex-col gap-5 p-5"
+              className="bg-[#1e1a33] rounded-lg shadow-xl w-[350px] flex flex-col gap-5 p-5"
             >
               <img
                 src={set.thumbnail}

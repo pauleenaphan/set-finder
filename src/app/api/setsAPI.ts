@@ -1,30 +1,9 @@
 import { getOauth } from "./tokenAPI";
+import { formatDate } from "../utils/format";
+import { SetResult, RankedSet } from "@/types/setTypes";
 
-// Type Definitions
-interface SetResult {
-    platform: string;
-    id: string;
-    title: string;
-    publishedDate: string;
-    link: string;
-    thumbnail: string;
-}
-
-interface RankedSet {
-    title: string;
-    platforms: SetResult[];
-    matchScore?: number;
-}
-
-// Formats a date string into "MMM DD, YYYY"
-function formatDate(rawDate: string | number | Date): string {
-    const dateObj = new Date(rawDate);
-    return dateObj.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-    });
-}
+import { deleteDoc, addDoc, collection, doc, getDoc, setDoc, getDocs } from "firebase/firestore";
+import { auth, db } from "./firebase";
 
 // Fetches live sets from SoundCloud and YouTube, then ranks and returns them
 export const fetchSets = async (setName: string) => {
@@ -220,3 +199,37 @@ const checkArtist = async (artistName: string) => {
 
     return false;
 };
+
+
+// Grab updated new sets data
+export const fetchWeeklyNewSets = async () =>{
+    console.log("fetching weekly new sets");
+
+    try{
+        const docSnap = await getDoc(doc(db, "live_sets", "YTNewestSets"));
+
+        return docSnap.exists()
+        ? Object.values(docSnap.data()?.ytNewestSets || {}) as SetResult[] // Type cast here
+        : [];
+
+    }catch(error){
+        console.error("Error fetching weekly sets");
+        return [];
+    }
+}
+
+export const fetchWeeklyTrendingSets = async () =>{
+    console.log("fetching weekly trending sets");
+
+    try{
+        const docSnap = await getDoc(doc(db, "live_sets", "YTTrendingSets"));
+
+        return docSnap.exists()
+        ? Object.values(docSnap.data()?.ytTrendingSets || {}) as SetResult[] // Type cast here
+        : [];
+
+    }catch(error){
+        console.error("Error fetching weekly sets");
+        return [];
+    }
+}

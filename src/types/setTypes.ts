@@ -42,4 +42,21 @@ export interface SetListProps {
     setResults: SetData[] | UserLikesParam[];
     likedSets: Record<string, boolean>;
     handleLikeStatus: (id: string, liked: boolean) => void;
+    style: string;
+}
+
+// Type Definitions
+export interface SetResult {
+    platform: string;
+    id: string;
+    title: string;
+    publishedDate: string;
+    link: string;
+    thumbnail: string;
+}
+
+export interface RankedSet {
+    title: string;
+    platforms: SetResult[];
+    matchScore?: number;
 }
