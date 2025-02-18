@@ -1,0 +1,15 @@
+@media(max-width: 599px){
+    /* Padding in footer */
+    .p-32{
+        padding: 70px;
+    }
+
+    .footerSocials{
+        flex-direction: row;
+    }
+
+    .linkHeadList{
+        justify-content: space-between;
+    }
+}
+

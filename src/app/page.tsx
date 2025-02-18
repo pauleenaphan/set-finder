@@ -40,16 +40,22 @@ export default function Home() {
             <div className="coloredBead bg-green-400"></div>
             <div className="coloredBead bg-blue-400 "></div>
             <div className="text-5xl"> - </div>
-            <div className="letterBead text-neonPink "> S </div>
-            <div className="letterBead text-neonBlue"> E </div>
-            <div className="letterBead text-neonGreen"> T </div>
-            <div className="text-5xl"> - </div>
-            <div className="letterBead text-neonOrange"> F </div>
-            <div className="letterBead text-neonBlue"> I </div>
-            <div className="letterBead text-neonPurple"> N </div>
-            <div className="letterBead text-neonPink"> D </div>
-            <div className="letterBead text-neonGreen"> E </div>
-            <div className="letterBead text-neonOrange"> R </div>
+            <div className="kandiTitle flex items-center">
+              <div className="kandiLetterContainer flex">
+                <div className="letterBead text-neonPink "> S </div>
+                <div className="letterBead text-neonBlue"> E </div>
+                <div className="letterBead text-neonGreen"> T </div>
+              </div>
+              {/* <div className="text-5xl"> - </div> */}
+              <div className="kandiLetterContainer flex">
+                <div className="letterBead text-neonOrange"> F </div>
+                <div className="letterBead text-neonBlue"> I </div>
+                <div className="letterBead text-neonPurple"> N </div>
+                <div className="letterBead text-neonPink"> D </div>
+                <div className="letterBead text-neonGreen"> E </div>
+                <div className="letterBead text-neonOrange"> R </div>
+              </div>
+            </div>
             <div className="text-5xl"> - </div>
             <div className="coloredBead bg-yellow-400"></div>
             <div className="coloredBead bg-pink-400"></div>
@@ -61,7 +67,7 @@ export default function Home() {
             <div className="coloredBead bg-blue-400 "></div>
           </div>
           <div className="flex gap-5 justify-center items-center  flex-col">
-            <p className="text-3xl text-gray-300 w-1/2 text-center mb-8"> 
+            <p className="caption text-3xl text-gray-300 w-1/2 text-center mb-8"> 
               Missed a set? Come find it! A dedicated platform for 
               discovering live EDM sets from YouTube and SoundCloud—all in one place.
             </p>
@@ -75,7 +81,7 @@ export default function Home() {
               <p className="text-gray-300"> ABOUT US </p>
               <h1 className="text-center text-5xl my-8 tracking-wide text-neonBlue"> All Your EDM Live Sets in One Place </h1>
           </div>
-          <p className="text-2xl text-gray-300"> 
+          <p className="caption text-2xl text-gray-300"> 
             Set Finder is a dedicated platform for discovering live EDM sets. We know how 
             frustrating it can be to track down sets scattered across different platforms. 
             With Set Finder, you can keep all your favorite sets in one place, making it easier 
@@ -91,20 +97,20 @@ export default function Home() {
             <p className="text-gray-300"> OUR FEATURES </p>
             <h2 className="text-center text-5xl my-8 tracking-wide text-neonBlue"> Explore, Save, and Share Your Favorite Sets </h2>
           </div>
-            <div className="flex gap-10">
+            <div className="featureContainer flex gap-10">
               <article className="homeCard">
                 <p className="text-2xl font-bold"> All in One Platform </p>
-                <FaClipboardList className="text-8xl"/>
+                <FaClipboardList className="featureIcon text-8xl"/>
                 <p className="text-lg"> Search for uploaded sets from youtube and soundcloud all in one place </p>
               </article>
               <article className="homeCard">
                 <p className="text-2xl font-bold"> Like & Save Sets </p>
-                <FaHeart className="text-8xl"/>
+                <FaHeart className="featureIcon text-8xl"/>
                 <p className="text-lg"> Keep track of the sets you enjoy the most by liking and creating playlist </p>
               </article>
               <article className="homeCard">
                 <p className="text-2xl font-bold"> Discover New Sets </p>
-                <FaMusic className="text-8xl"/>
+                <FaMusic className="featureIcon text-8xl"/>
                 <p className="text-lg"> Explore new and trending EDM sets and expand your collection </p>
               </article>
             </div>
@@ -138,7 +144,7 @@ export default function Home() {
           </ul>
         </section>
 
-        <section className="text-center">
+        <section className="text-center w-2/3 mx-auto">
           <p className="text-gray-300"> Get Started </p>
           <h4 className="text-5xl my-8 tracking-wide text-neonBlue"> All Your Favorite Sets, One Platform. Start Now! </h4>
           <button className="ctaBtn"> Explore Sets </button>

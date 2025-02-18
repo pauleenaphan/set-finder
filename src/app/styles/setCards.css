@@ -1,0 +1,14 @@
+@media(max-width: 599px){
+    .setCard{
+        width: 300px !important;
+    }
+
+    /* explore page */
+    .currTab{
+        margin: 0 auto;
+    }
+
+    .likesList{
+        justify-content: center;
+    }
+}

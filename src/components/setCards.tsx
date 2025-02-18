@@ -3,6 +3,8 @@ import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { ImYoutube, ImSoundcloud2 } from 'react-icons/im';
 import { SetData, UserLikesParam, SetListProps } from '@/types/setTypes';
 
+import "../app/styles/setCards.css";
+
 const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handleLikeStatus, style }) => {
   return (
     <div className={`my-6 ${style}`}>
@@ -12,7 +14,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as SetData[]).map((set: SetData, index: number) => (
             <div
               key={index}
-              className="bg-[#1e1a33] rounded-lg shadow-xl rounded-lg w-[400px] flex flex-col gap-5 p-5 justify-between"
+              className="setCard bg-[#1e1a33] rounded-lg shadow-xl rounded-lg w-[400px] flex flex-col gap-5 p-5 justify-between"
             >
               <div>
                 <img
@@ -66,7 +68,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as UserLikesParam[]).map((set: UserLikesParam, index: number) => (
             <div
               key={index}
-              className="bg-[#1e1a33] rounded-lg shadow-xl w-[400px] flex flex-col gap-5 p-5 justify-between"
+              className="setCard bg-[#1e1a33] rounded-lg shadow-xl w-[400px] flex flex-col gap-5 p-5 justify-between"
             >
               <div>
                 <img

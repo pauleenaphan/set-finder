@@ -12,3 +12,67 @@
     text-align: center;
 }
 
+/* Kandi Beads */
+.coloredBead{
+    min-width: 90px;
+    min-height: 90px;
+    border-radius: 20px;
+}
+
+.letterBead{
+    font-size: 70px;
+    border: 2px solid rgb(19, 19, 19);
+    border-radius: 20px;
+    font-weight: bold;
+    min-width: 110px;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000;
+}
+
+@media(max-width: 599px){
+    /* headings  */
+    .text-5xl{
+        font-size: 38px;
+    }
+    
+    .kandiTitle{
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .letterBead{
+        font-size: 40px;
+        min-width: 60px;
+        min-height: 60px;
+        border-radius: 15px;
+    }
+
+    .coloredBead{
+        min-width: 50px;
+        min-height: 50px;
+        border-radius: 10px;
+    }
+
+    .caption{
+        text-align: center;
+        font-size: 18px;
+    }
+    .featureContainer{
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .featureIcon{
+        font-size: 50px;
+    }
+    
+    .homeCard{
+        width: 80%;
+    }
+}
+

@@ -4,11 +4,13 @@ import Link from "next/link";
 
 import { IoMdMail } from "react-icons/io";
 
+import "../app/styles/footer.css";
+
 export function Footer(){
     return(
         <footer className="bg-gray-900 w-full p-32 mt-40">
-            <div className="mx-auto flex gap-32 justify-between mb-24">
-                <div className="flex gap-32">
+            <div className="mx-auto flex gap-32 justify-between mb-24 flex-wrap">
+                <div className="linkHeadList flex gap-32 flex-wrap">
                     <ul className="flex flex-col gap-1">
                         <li className="underline text-xl"> Company </li>
                         <Link href="/#about"> About Us </Link>
@@ -29,13 +31,13 @@ export function Footer(){
                 </div>
                 
 
-                <ul className="flex flex-col gap-5 justify-evenly text-xl">
+                <ul className="footerSocials flex flex-col gap-5 justify-evenly text-xl">
                     <a href="" target="_blank"><FaGithub /></a>
                     <a href="" target="_blank"><FaInstagram /></a>
                     <a href="" target="_blank"><FaLinkedin /></a>
                 </ul>
             </div>
-            <div className="flex justify-between">
+            <div className="flex justify-between flex-wrap gap-10">
                 <p> Copyright @ Pauleena Phan 2025. All Rights Reserved </p>
                 <p> Powered by Netlify </p>
             </div>
