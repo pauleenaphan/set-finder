@@ -7,6 +7,7 @@ import { checkLike, removeLike, addLike } from "../api/likesAPI";
 import SetList from "@/components/setCards";
 
 import { SetResult } from "@/types/setTypes";
+import Modal from "@/components/modal";
 
 export default function explore(){
     const { user, loading: authLoading } = useAuth(); 
@@ -15,6 +16,8 @@ export default function explore(){
 
     const [likedTrendingSets, setTrendingLikedSets] = useState<{ [key: string]: boolean }>({});
     const [likedNewSets, setNewLikedSets] = useState<{ [key: string]: boolean }>({});
+
+    const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
 
     const getWeekly = async () =>{
         const weekSetResults = await fetchWeeklyNewSets();
@@ -61,7 +64,12 @@ export default function explore(){
     
     // For Trending liked sets 
     const handleLikeStatus = async (setId: string, status: boolean) => {
-        if (user) {
+        if(localStorage.getItem("setFinderIsLogged") === "false"){
+            setLoggedInModal(true);
+            return;
+        }
+
+        if(user){
             if(status == true){
                 // Updates the current set to true/false 
                 // Then triggers the useeffect which will display which sets are liked or not
@@ -76,7 +84,12 @@ export default function explore(){
 
     // For Newest liked sets 
     const handleNewLikeStatus = async (setId: string, status: boolean) => {
-        if (user) {
+        if(localStorage.getItem("setFinderIsLogged") === "false"){
+            setLoggedInModal(true);
+            return;
+        }
+
+        if(user){
             if(status == true){
                 // Updates the current set to true/false 
                 // Then triggers the useeffect which will display which sets are liked or not
@@ -92,6 +105,12 @@ export default function explore(){
 
     return(
         <main className="mb-40 w-4/5 mx-auto flex gap-40 flex-col">
+            <Modal
+                title="You are not logged in"
+                description="Please login to like a set"
+                isOpen={loggedInModal}
+                onClose={() =>{ setLoggedInModal(false) }}
+            />
             <section>
                 <h1 className="text-neonBlue text-3xl tracking-wider"> TRENDING SETS  </h1> 
                 {trendingSets.length > 0 ? (
@@ -126,10 +145,10 @@ export default function explore(){
                 )}
             </section>
 
-            <section>
+            {/* <section>
                 <h3 className="text-neonBlue text-3xl tracking-wider"> GENRE SPOTLIGHT: GENRE </h3>
                 <p> Loading sets... </p>
-            </section>
+            </section> */}
         </main>
     )
 }

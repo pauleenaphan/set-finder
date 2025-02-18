@@ -79,7 +79,7 @@ export const getSoundCloudSets = async (setNameOrList: string | string[]) => {
                 title: track.title,
                 publishedDate: formatDate(track.created_at),
                 link: track.permalink_url,
-                thumbnail: track.artwork_url || "",
+                thumbnail: track.artwork_url ? track.artwork_url.replace(/large/, 't500x500') : "",
             }));
         } catch (error) {
             console.error("Error fetching SoundCloud sets:", error);

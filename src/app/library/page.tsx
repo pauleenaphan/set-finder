@@ -4,18 +4,23 @@ import { useEffect, useState } from "react";
 
 import { getLikes, checkLike, removeLike, addLike } from "../api/likesAPI";
 import { useAuth } from "../utils/fbAuth";
-
 import { UserLikesParam } from "@/types/setTypes";
+
 import SetList from "@/components/setCards";
+import Modal from "@/components/modal";
 
 export default function library(){
     const [currTab, setCurrTab] = useState<string>("likes");
     const [userLikes, setUserLikes] = useState<UserLikesParam[]>([]); // temp string for now
     const [likedSets, setLikedSets] = useState<{ [key: string]: boolean }>({});
+    const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
 
     const { user, loading: authLoading } = useAuth(); 
 
     useEffect(() => {
+        if(localStorage.getItem("setFinderIsLogged") === "false"){
+            setLoggedInModal(true);
+        }
         if (currTab === "likes" && user) {
             // Ensure getLikes returns the correct type
             getLikes(user.uid).then((likes) => setUserLikes(likes));
@@ -70,7 +75,13 @@ export default function library(){
 
     return(
         <main className="mb-40 w-4/5 mx-auto">
-            <div className="flex gap-10 text-3xl mb-10 font-bold">
+            <Modal
+                title="You are not logged in"
+                description="Please login to view your library"
+                isOpen={loggedInModal}
+                onClose={() =>{ setLoggedInModal(false) }}
+            />
+            <div className="flex gap-10 text-3xl mb-4 font-bold">
             <button
                 onClick={() => setCurrTab("likes")}
                 className={`pb-1 ${currTab === "likes" ? "border-b-2 border-neonBlue text-neonBlue" : ""} tracking-wider`}
@@ -91,6 +102,7 @@ export default function library(){
                         setResults={userLikes}
                         likedSets={likedSets}
                         handleLikeStatus={handleLikeStatus}
+                        style="flex gap-5 flex-wrap flex-row"
                     />
                 </section>
                 

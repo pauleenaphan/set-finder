@@ -12,6 +12,7 @@ import { checkLike, removeLike, addLike } from "../api/likesAPI";
 import { useAuth } from "../utils/fbAuth";
 
 import SetList from '@/components/setCards';
+import Modal from '@/components/modal';
 
 export default function liveSets() {
     const searchParams = useSearchParams();
@@ -22,9 +23,11 @@ export default function liveSets() {
     const [setResults, setSetResults] = useState<SetData[]>([]);
     const [likedSets, setLikedSets] = useState<{ [key: string]: boolean }>({});
 
+    const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
+
     // Fetch sets when setName changes
     useEffect(() => {
-        if (authLoading || !user) return;
+        if (authLoading) return;
 
         const fetchAndSetResults = async () => { 
             if(setName){
@@ -66,6 +69,11 @@ export default function liveSets() {
 
     // Triggers when a set is liked or unliked
     const handleLikeStatus = async (setId: string, status: boolean) => {
+        if(localStorage.getItem("setFinderIsLogged") === "false"){
+            setLoggedInModal(true);
+            return;
+        }
+
         if (user) {
             if(status == true){
                 // Updates the current set to true/false 
@@ -87,15 +95,20 @@ export default function liveSets() {
 
     return (
         <div className="w-4/5 mx-auto">
-            <h1 className="text-3xl"> Results For: {setName} </h1>
-            <div className="flex gap-8 flex-wrap my-10">
-                <SetList
-                    status="searchResults"
-                    setResults={setResults}
-                    likedSets={likedSets}
-                    handleLikeStatus={handleLikeStatus}
-                />
-            </div>
+            <Modal
+                title="You are not logged in"
+                description="Please login to like a set"
+                isOpen={loggedInModal}
+                onClose={() =>{ setLoggedInModal(false)}}
+            />
+            <h1 className="text-3xl text-neonBlue"> Results For: {setName} </h1>
+            <SetList
+                status="searchResults"
+                setResults={setResults}
+                likedSets={likedSets}
+                handleLikeStatus={handleLikeStatus}
+                style="flex gap-5 flex-wrap flex-row"
+            />
         </div>
     );
 }

@@ -1,13 +1,32 @@
+"use client"
+
 import Image from "next/image";
 
 import Link from "next/link";
 
+import { useState } from "react";
+
 import { FaClipboardList, FaHeart, FaMusic } from "react-icons/fa";
+import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 
 import "../app/styles/home.css";
 
 // First page that user sees 
 export default function Home() {
+  const [openQuestion, setOpenQuestion] = useState<number | null>(null);
+
+  const toggleQuestion = (index: number) => {
+    setOpenQuestion(openQuestion === index ? null : index);
+  };
+
+  const faqs = [
+    { question: "How does SetFinder Work?", answer: "Search for a set, like and favorite that set, find it in your library and listen anytime." },
+    { question: "Is this platform 100% free to use?", answer: "Yes, SetFinder is free to use!" },
+    { question: "Where do the sets come from?", answer: "Sets are fetched using SoundCloud and YouTube API." },
+    { question: "Why isn't the search working?", answer: "SetFinder relies on APIs from platforms like YouTube and SoundCloud to fetch live EDM sets. These services have rate limits, meaning we can only make a certain number of searches within a specific time. If the search isn’t working, we may have hit our API limit. Try again later, or consider supporting us to help improve the platform’s stability!" },
+    { question: "How can I support SetFinder?", answer: "You can support by buying the creator a Ko-fi!" },
+  ];
+
   return (
     <main className="flex flex-col gap-60 mb-60">
         <section className="mt-[3%]">
@@ -50,8 +69,12 @@ export default function Home() {
           </div>
         </section>
 
-        {/* <section className="w-2/3 mx-auto">
-          <h1 className="text-center text-5xl mb-8 tracking-wider text-neonBlue"> ABOUT US </h1>
+      <section className="bg-gray-900 py-20">
+        <div className="w-2/3 mx-auto">
+          <div className="text-center">
+              <p className="mb-8 text-gray-300"> ABOUT US </p>
+              <h1 className="text-center text-5xl mb-8 tracking-wide text-neonBlue"> All Your EDM Live Sets in One Place </h1>
+          </div>
           <p className="text-2xl text-gray-300"> 
             Set Finder is a dedicated platform for discovering live EDM sets. We know how 
             frustrating it can be to track down sets scattered across different platforms. 
@@ -60,28 +83,61 @@ export default function Home() {
             said no? No worries—find the set and experience the moment through the eyes of 
             someone who was there.
           </p>
-        </section> */}
+        </div>
+      </section>
+        
 
-        {/* <section className="w-2/3 mx-auto"> 
-          <h2 className="text-center text-5xl mb-8 tracking-wider text-neonBlue"> OUR FEATURES </h2>
-          <div className="flex gap-10">
-            <article className="homeCard">
-              <p className="text-2xl font-bold"> Create Playlist </p>
-              <FaClipboardList className="text-8xl"/>
-              <p className="text-lg"> Save all of your sets into one playlist </p>
-            </article>
-            <article className="homeCard">
-              <p className="text-2xl font-bold"> Like & Save Sets </p>
-              <FaHeart className="text-8xl"/>
-              <p className="text-lg"> Keep track of the sets you enjoy the most </p>
-            </article>
-            <article className="homeCard">
-              <p className="text-2xl font-bold"> Discover New Sets </p>
-              <FaMusic className="text-8xl"/>
-              <p className="text-lg"> Explore new EDM sets and expand your collection </p>
-            </article>
+        <section className="w-2/3 mx-auto "> 
+          <div className="text-center">
+            <p className="mb-8 text-gray-300"> OUR FEATURES </p>
+            <h2 className="text-center text-5xl mb-8 tracking-wide text-neonBlue"> Explore, Save, and Share Your Favorite Sets </h2>
           </div>
-        </section> */}
+            <div className="flex gap-10">
+              <article className="homeCard">
+                <p className="text-2xl font-bold"> All in One Platform </p>
+                <FaClipboardList className="text-8xl"/>
+                <p className="text-lg"> Search for uploaded sets from youtube and soundcloud all in one place </p>
+              </article>
+              <article className="homeCard">
+                <p className="text-2xl font-bold"> Like & Save Sets </p>
+                <FaHeart className="text-8xl"/>
+                <p className="text-lg"> Keep track of the sets you enjoy the most by liking and creating playlist </p>
+              </article>
+              <article className="homeCard">
+                <p className="text-2xl font-bold"> Discover New Sets </p>
+                <FaMusic className="text-8xl"/>
+                <p className="text-lg"> Explore new and trending EDM sets and expand your collection </p>
+              </article>
+            </div>
+        </section>
+
+        <section>
+          <h3 className="text-xl font-bold w-2/3 mx-auto">FAQ</h3>
+          <ul className="mt-4 bg-blue-500 w-2/3 mx-auto">
+            {faqs.map((faq, index) => (
+              <li key={index} className="border-b py-2">
+                <button 
+                  onClick={() => toggleQuestion(index)} 
+                  className="font-bold flex w-full justify-between"
+                >
+                  {faq.question}
+                  {openQuestion === index ? (
+                    <MdKeyboardArrowDown size={24} />
+                  ) : (
+                    <MdKeyboardArrowRight size={24} />
+                  )}
+                </button>
+                <div 
+                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
+                    openQuestion === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
+                  }`}
+                >
+                  <p className="p-2 text-gray-300">{faq.answer}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </section>
     </main>
   );
 }
