@@ -21,6 +21,12 @@ export default function Nav(){
         setIsLoggedIn(loggedInStatus);
     }, []); // This will run only once when the component mounts
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            router.push(`/liveSet?setName=${encodeURIComponent(inputSet)}`);
+        }
+    };
+
     return(
         <nav className="flex justify-between px-12 py-8 items-center gap-32 mb-[8%]">
             <Link href="/" className=" w-[20%]" >
@@ -30,9 +36,8 @@ export default function Nav(){
 
             <div className="flex w-[35%] relative text-lg">
                 <input type="text" placeholder="Search for Set" onChange={(e) =>{setInputSet(e.target.value)}} required
-                    className="p-2 px-5 rounded-3xl w-full border-2 border-white bg-transparent outline-none
-                        
-                    "
+                    className="p-2 px-5 rounded-3xl w-full border-2 border-white bg-transparent outline-none"
+                    onKeyDown={handleKeyPress}
                 ></input>
                 <button onClick={() =>{ router.push(`/liveSet?setName=${encodeURIComponent(inputSet)}`)}} 
                     className="absolute right-5 top-1/2 transform -translate-y-1/2">

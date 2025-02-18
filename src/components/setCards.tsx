@@ -33,7 +33,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                       className="flex items-center gap-3"
                     >
                       {platform.platform === 'yt' ? (
-                        <ImYoutube className="text-3xl text-red-500 bg-white p-1 rounded"/>
+                        <ImYoutube className="text-2xl text-red-500 bg-white p-[3px] rounded"/>
                       ) : (
                         <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
                       )}
@@ -86,7 +86,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                     className="flex items-center gap-3"
                   >
                     {set.platform === 'yt' ? (
-                      <ImYoutube className="text-3xl text-red-500  bg-white p-1 rounded"/>
+                      <ImYoutube className="text-3xl text-red-500 p-[3px] bg-white rounded"/>
                     ) : (
                       <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
                     )}
@@ -110,7 +110,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
             </div>
           ))
         ) : (
-          <p>Looping through liked sets...</p>
+          <p>Loading Results...</p>
         )
       )}
     </div>

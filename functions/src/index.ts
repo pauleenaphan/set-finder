@@ -25,10 +25,12 @@ function formatDate(rawDate: string | number | Date): string {
 export const fetchLiveEDMSets = onSchedule("every sunday 00:00", async () => {
   logger.info("Fetching new EDM live sets...");
 
+  const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+
   try {
     // Gets newest YouTube sets
     const ytNewestSetsResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=live%20EDM%20set&maxResults=10&type=video&order=date&key=${process.env.YT_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=live%20EDM%20set&maxResults=10&type=video&order=date&publishedAfter=${firstDayOfMonth}&key=${process.env.YT_API_KEY}`
     );
     const ytNewestSetsData = await ytNewestSetsResponse.json();
 

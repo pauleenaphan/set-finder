@@ -63,7 +63,7 @@ export const getSoundCloudSets = async (setNameOrList: string | string[]) => {
 
     if(typeof setNameOrList === "string"){
         try {
-            const response = await fetch(`https://api.soundcloud.com/tracks?q=${setNameOrList}&limit=2`, {
+            const response = await fetch(`https://api.soundcloud.com/tracks?q=${setNameOrList}&limit=10`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${oauthToken}` },
             });
@@ -122,7 +122,7 @@ export const getYoutubeSets = async (setNameOrList: string | string[]) => {
     if(typeof setNameOrList === "string"){
         try {
             const response = await fetch(
-                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=2&q=${encodeURIComponent(setNameOrList)}&key=${process.env.NEXT_PUBLIC_YT_API_KEY}`
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&maxResults=10&q=${encodeURIComponent(setNameOrList)}&key=${process.env.NEXT_PUBLIC_YT_API_KEY}`
             );
 
             if (!response.ok) throw new Error("Failed to fetch YouTube sets");

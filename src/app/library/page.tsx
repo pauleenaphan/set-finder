@@ -88,12 +88,12 @@ export default function library(){
             >
                 LIKES 
             </button>
-            <button
+            {/* <button
                 onClick={() => setCurrTab("playlist")}
                 className={`pb-1 ${currTab === "playlist" ? "border-b-2 border-neonBlue text-neonBlue" : ""} tracking-wider`}
             >
                 PLAYLIST
-            </button>
+            </button> */}
             </div>
             {currTab === "likes" ? (
                 <section>

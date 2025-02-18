@@ -69,11 +69,11 @@ export default function Home() {
           </div>
         </section>
 
-      <section className="bg-gray-900 py-20">
+      <section id="about" className="bg-gray-900 py-20">
         <div className="w-2/3 mx-auto">
           <div className="text-center">
-              <p className="mb-8 text-gray-300"> ABOUT US </p>
-              <h1 className="text-center text-5xl mb-8 tracking-wide text-neonBlue"> All Your EDM Live Sets in One Place </h1>
+              <p className="text-gray-300"> ABOUT US </p>
+              <h1 className="text-center text-5xl my-8 tracking-wide text-neonBlue"> All Your EDM Live Sets in One Place </h1>
           </div>
           <p className="text-2xl text-gray-300"> 
             Set Finder is a dedicated platform for discovering live EDM sets. We know how 
@@ -86,11 +86,10 @@ export default function Home() {
         </div>
       </section>
         
-
-        <section className="w-2/3 mx-auto "> 
+        <section id="features" className="w-2/3 mx-auto "> 
           <div className="text-center">
-            <p className="mb-8 text-gray-300"> OUR FEATURES </p>
-            <h2 className="text-center text-5xl mb-8 tracking-wide text-neonBlue"> Explore, Save, and Share Your Favorite Sets </h2>
+            <p className="text-gray-300"> OUR FEATURES </p>
+            <h2 className="text-center text-5xl my-8 tracking-wide text-neonBlue"> Explore, Save, and Share Your Favorite Sets </h2>
           </div>
             <div className="flex gap-10">
               <article className="homeCard">
@@ -111,14 +110,14 @@ export default function Home() {
             </div>
         </section>
 
-        <section>
-          <h3 className="text-xl font-bold w-2/3 mx-auto">FAQ</h3>
-          <ul className="mt-4 bg-blue-500 w-2/3 mx-auto">
+        <section id="faq" className="bg-gray-900 py-20">
+          <h3 className="text-5xl font-bold w-2/3 mx-auto text-neonBlue"> FAQ </h3>
+          <ul className="mt-4 w-2/3 mx-auto">
             {faqs.map((faq, index) => (
-              <li key={index} className="border-b py-2">
+              <li key={index} className="border-b py-4">
                 <button 
                   onClick={() => toggleQuestion(index)} 
-                  className="font-bold flex w-full justify-between"
+                  className="text-xl flex w-full justify-between"
                 >
                   {faq.question}
                   {openQuestion === index ? (
@@ -137,6 +136,12 @@ export default function Home() {
               </li>
             ))}
           </ul>
+        </section>
+
+        <section className="text-center">
+          <p className="text-gray-300"> Get Started </p>
+          <h4 className="text-5xl my-8 tracking-wide text-neonBlue"> All Your Favorite Sets, One Platform. Start Now! </h4>
+          <button className="ctaBtn"> Explore Sets </button>
         </section>
     </main>
   );
