@@ -123,7 +123,7 @@ export default function Home() {
               <li key={index} className="border-b py-4">
                 <button 
                   onClick={() => toggleQuestion(index)} 
-                  className="text-xl flex w-full justify-between"
+                  className="text-xl flex w-full justify-between text-left"
                 >
                   {faq.question}
                   {openQuestion === index ? (

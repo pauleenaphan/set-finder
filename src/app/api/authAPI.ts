@@ -3,7 +3,6 @@ import { auth, googleProvider, db } from "./firebase";
 import { doc, setDoc } from "firebase/firestore";
 
 import { SignUpResponse, SignInResponse, GoogleSignInResponse } from "@/types/authTypes";
-import firebase from "firebase/compat/app";
 
 // Signing up without Google 
 export const signUpWithoutGoogle = async (email: string, password: string): Promise<SignUpResponse> => {

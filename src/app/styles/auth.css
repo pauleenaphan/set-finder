@@ -8,7 +8,7 @@
     letter-spacing: 2px;
 }
 
-.inputField{
+.inputField, .googleBtn{
     background-color: var(--darkBg);
     border: 2px solid rgb(126, 126, 126);
     padding: 20px;
@@ -17,4 +17,32 @@
 
 .inputFieldInCorrect{
     border: 2px solid rgb(163, 7, 7);
+}
+
+@media(max-width: 1280px){
+    .authForm{
+        width: 40%;
+    }
+
+    .googleBtn{
+        width: 40%;
+    }
+
+    .newUser, .oldUser{
+        font-size: 20px;
+    }
+}
+
+@media(max-width: 768px){
+    .authForm{
+        width: 50%;
+    }
+
+    .googleBtn{
+        width: 50%;
+    }
+
+    .newUser, .oldUser{
+        font-size: 18px;
+    }
 }

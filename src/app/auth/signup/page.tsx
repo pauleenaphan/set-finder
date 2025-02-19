@@ -42,7 +42,7 @@ export default function SignupForm() {
 
     return (
         <main className="mb-40">
-            <form onSubmit={() =>{ signUp("email") }} className="flex flex-col gap-10 w-1/3 mx-auto">
+            <form onSubmit={() =>{ signUp("email") }} className="authForm flex flex-col gap-10 w-1/3 mx-auto">
                 <h1 className="text-5xl text-neonBlue text-center"> Welcome to Setfinder! </h1>
                 <div className="inputContainer">
                     <label htmlFor="email" className="inputLabel">EMAIL:</label>
@@ -91,12 +91,12 @@ export default function SignupForm() {
             </form> 
 
             <article onClick={() =>{ signUp("google") }}
-                className="inputField w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
+                className="googleBtn w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
                 <FcGoogle className="text-2xl"/>
                 <button className="text-xl"> Sign Up with Google </button>
             </article>
             
-            <article className="flex gap-5 justify-center">
+            <article className="oldUser flex gap-5 justify-center">
                 <p> Already have an account? </p> 
                 <Link href="/auth/login" className="underline"> Login </Link>
             </article>

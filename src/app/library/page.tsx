@@ -69,7 +69,7 @@ export default function library(){
 
     if(authLoading){
         return( 
-            <div> Loading... </div>
+            <div className="w-4/5 mx-auto"> Loading... </div>
         )
     }
 
@@ -102,7 +102,7 @@ export default function library(){
                         setResults={userLikes}
                         likedSets={likedSets}
                         handleLikeStatus={handleLikeStatus}
-                        style="flex gap-5 flex-wrap flex-row sm:w-[599px] sm:justify-center"
+                        style="flex flex-wrap justify-between gap-8"
                     />
                 </section>
                 

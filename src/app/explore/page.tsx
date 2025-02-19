@@ -120,7 +120,7 @@ export default function explore(){
                             setResults={trendingSets}
                             likedSets={likedTrendingSets}
                             handleLikeStatus={handleLikeStatus}
-                            style="flex gap-5 w-fit"
+                            style="flex gap-5 w-[4000px]"
                         />
                     </div>
                 ) : (
@@ -137,7 +137,7 @@ export default function explore(){
                             setResults={newSets}
                             likedSets={likedNewSets}
                             handleLikeStatus={handleNewLikeStatus}
-                            style="flex gap-5 w-fit"
+                            style="flex gap-5 w-[4000px]"
                         />
                     </div>
                 ) : (

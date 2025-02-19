@@ -1,10 +1,11 @@
 "use client"
 
 import "./globals.css";
-import Nav from "../components/nav";
+import WindowNav from "../components/windowNav";
+import MobileNav from "@/components/mobileNav";
 import { Footer } from "@/components/footer";
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 export default function RootLayout({
@@ -14,6 +15,7 @@ export default function RootLayout({
 }>) {
 
   const pathname = usePathname();
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     // Scroll to top whenever the path changes
@@ -21,10 +23,26 @@ export default function RootLayout({
   }, [pathname]);  // Dependency on pathname to track route changes
 
 
+  // To display mobile or window nav
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 769){
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+
+    handleResize(); // check on mount
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize); // cleanup
+  }, []);
+
   return (
     <html lang="en">
       <body>
-        <Nav></Nav>
+        {isMobile ? <MobileNav/> : <WindowNav/>}
         {children}
         <Footer></Footer>
       </body>

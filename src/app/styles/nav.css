@@ -1,4 +1,4 @@
-@media(max-width: 599px){
+@media(max-width: 768px){
     .navBar{
         padding: 30px 20px;
     }
@@ -7,10 +7,24 @@
         width: 200px;
     }
 
-    .searchIcon{
-        position: absolute;
-        left: 120;
-        top: -12;
+    .searchBar{
+        display: none;
+    }
+
+    .searchBtn{
+        display: none;
     }
 }
+
+@media(max-width: 1280px){
+    .logo{
+        width: 250px;
+    }
+
+    .navLinks{
+        font-size: 18px;
+    }
+}
+
+
 

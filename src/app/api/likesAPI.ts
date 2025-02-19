@@ -1,6 +1,5 @@
-import { deleteDoc, addDoc, collection, doc, getDoc, setDoc, getDocs } from "firebase/firestore";
-import { auth, db } from "./firebase";
-import { LikeParams } from "@/types/setTypes";
+import { deleteDoc, collection, doc, getDoc, setDoc, getDocs } from "firebase/firestore";
+import { db } from "./firebase";
 import { getSoundCloudSets, getYoutubeSets } from "../api/setsAPI";
 
 // Define the error type for Firebase errors
@@ -37,8 +36,8 @@ export const getLikes = async (userUid: string) => {
     // grab list of id from firebase
     const likes = await getDocs(collection(db, "users", userUid, "likes"));
 
-    let scList: string[] = [];
-    let ytList: string[] = [];
+    const scList: string[] = [];
+    const ytList: string[] = [];
 
     // Process likes in one loop
     likes.forEach((doc) => {
@@ -46,8 +45,8 @@ export const getLikes = async (userUid: string) => {
         (id.length === 10 ? scList : ytList).push(id);
     });
 
-    let scSets = await getSoundCloudSets(scList); // Await the result of the SoundCloud fetch
-    let ytSets = await getYoutubeSets(ytList);    // Await the result of the YouTube fetch
+    const scSets = await getSoundCloudSets(scList); // Await the result of the SoundCloud fetch
+    const ytSets = await getYoutubeSets(ytList);    // Await the result of the YouTube fetch
 
     let combinedSets = scSets.concat(ytSets);  
 

@@ -14,7 +14,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as SetData[]).map((set: SetData, index: number) => (
             <div
               key={index}
-              className="setCard bg-[#1e1a33] rounded-lg shadow-xl rounded-lg w-[400px] flex flex-col gap-5 p-5 justify-between"
+              className="setCard bg-[#1e1a33] rounded-lg shadow-xl rounded-lg w-[32%] flex flex-col gap-5 p-5 justify-between"
             >
               <div>
                 <img
@@ -68,7 +68,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as UserLikesParam[]).map((set: UserLikesParam, index: number) => (
             <div
               key={index}
-              className="setCard bg-[#1e1a33] rounded-lg shadow-xl w-[400px] flex flex-col gap-5 p-5 justify-between"
+              className="setCard bg-[#1e1a33] rounded-lg shadow-xl w-[32%] flex flex-col gap-5 p-5 justify-between"
             >
               <div>
                 <img
