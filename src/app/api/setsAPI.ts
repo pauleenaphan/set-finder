@@ -1,6 +1,6 @@
 import { getOauth } from "./tokenAPI";
 import { formatDate } from "../utils/format";
-import { SetResult, RankedSet } from "@/types/setTypes";
+import { SingleSet, RankedSet, YouTubeSet, SoundCloudSet } from "@/types/setTypes";
 
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
@@ -20,8 +20,8 @@ export const fetchSets = async (setName: string) => {
     console.log("Updated search query:", setName);
 
     // Fetch SoundCloud & YouTube sets
-    const scSets: SetResult[] = await getSoundCloudSets(setName);
-    const ytSets: SetResult[] = await getYoutubeSets(setName);
+    const scSets: SingleSet[] = await getSoundCloudSets(setName);
+    const ytSets: SingleSet[] = await getYoutubeSets(setName);
 
     console.log("SoundCloud Sets:", scSets);
     console.log("YouTube Sets:", ytSets);
@@ -73,7 +73,7 @@ export const getSoundCloudSets = async (setNameOrList: string | string[]) => {
             const data = await response.json();
             console.log("SoundCloud Data from get SC Sets:", data);
 
-            return data.map((track: any) => ({
+            return data.map((track: SoundCloudSet) => ({
                 platform: "sc",
                 id: track.id.toString(),
                 title: track.title,
@@ -130,7 +130,7 @@ export const getYoutubeSets = async (setNameOrList: string | string[]) => {
             const data = await response.json();
             console.log("YouTube Data from get YT sets:", data.items);
 
-            return data.items.map((item: any) => ({
+            return data.items.map((item: YouTubeSet) => ({
                 platform: "yt",
                 id: item.id.videoId,
                 title: item.snippet.title,
@@ -209,7 +209,7 @@ export const fetchWeeklyNewSets = async () =>{
         const docSnap = await getDoc(doc(db, "live_sets", "YTNewestSets"));
 
         return docSnap.exists()
-        ? Object.values(docSnap.data()?.ytNewestSets || {}) as SetResult[] // Type cast here
+        ? Object.values(docSnap.data()?.ytNewestSets || {}) as SingleSet[] // Type cast here
         : [];
 
     }catch(error){
@@ -225,7 +225,7 @@ export const fetchWeeklyTrendingSets = async () =>{
         const docSnap = await getDoc(doc(db, "live_sets", "YTTrendingSets"));
 
         return docSnap.exists()
-        ? Object.values(docSnap.data()?.ytTrendingSets || {}) as SetResult[] // Type cast here
+        ? Object.values(docSnap.data()?.ytTrendingSets || {}) as SingleSet[] // Type cast here
         : [];
 
     }catch(error){

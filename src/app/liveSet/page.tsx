@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 
 import "../styles/sets.css";
@@ -14,10 +14,10 @@ import { useAuth } from "../utils/fbAuth";
 import SetList from '@/components/setCards';
 import Modal from '@/components/modal';
 
-export default function LiveSets() {
+function LiveSets() {
     const searchParams = useSearchParams();
     const setName = searchParams.get("setName");
-    const { user, loading: authLoading } = useAuth();  // Get user from custom hook
+    const { user, loading: authLoading } = useAuth(); 
     const [loading, setLoading] = useState(true);
 
     const [setResults, setSetResults] = useState<SetData[]>([]);
@@ -112,3 +112,13 @@ export default function LiveSets() {
         </div>
     );
 }
+
+// Since we are using useSearchParams we need to make sure the component is rendered in the browser 
+// Suspense allows us to wait for async operrations to finish before we render the component 
+const SuspendedLiveSets = () => (
+    <Suspense fallback={<div>Loading...</div>}>
+        <LiveSets />
+    </Suspense>
+);
+
+export default SuspendedLiveSets

@@ -6,7 +6,7 @@ export type Thumbnail = {
 };
 
 // When user searches for a set 
-export type PlatformData = {
+export interface PlatformData{
     platform: string;
     id: string;
     publishedDate?: string;
@@ -15,7 +15,7 @@ export type PlatformData = {
 };
 
 // Putting set data into firebase
-export type SetData = {
+export interface SetData{
     title: string;
     platforms: PlatformData[];
 };
@@ -27,7 +27,7 @@ export interface LikeParams{
 }
 
 // Getting the sets that users likes 
-export type UserLikesParam = {
+export interface UserLikesParam{
     id: string;
     link: string;
     platform: string;
@@ -45,8 +45,8 @@ export interface SetListProps {
     style: string;
 }
 
-// Type Definitions
-export interface SetResult {
+// Single set 
+export interface SingleSet {
     platform: string;
     id: string;
     title: string;
@@ -55,8 +55,29 @@ export interface SetResult {
     thumbnail: string;
 }
 
+// Organized sets
 export interface RankedSet {
     title: string;
-    platforms: SetResult[];
+    platforms: SingleSet[];
     matchScore?: number;
+}
+
+export interface YouTubeSet{
+    id: { videoId: string };
+    snippet: {
+        title: string;
+        publishedAt: string;
+        thumbnails: {
+            maxres?: { url: string };
+            high: { url: string };
+        };
+    };
+}
+
+export interface SoundCloudSet{
+    id: string | number; // ID could be a string or number
+    title: string;
+    created_at: string;
+    permalink_url: string;
+    artwork_url?: string; // Optional property
 }
