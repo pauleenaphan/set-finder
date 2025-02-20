@@ -48,7 +48,7 @@ export const getLikes = async (userUid: string) => {
     const scSets = await getSoundCloudSets(scList); // Await the result of the SoundCloud fetch
     const ytSets = await getYoutubeSets(ytList);    // Await the result of the YouTube fetch
 
-    let combinedSets = scSets.concat(ytSets);  
+    const combinedSets = scSets.concat(ytSets);  
 
     console.log("getting likes", combinedSets);
     // return listOfLikes;

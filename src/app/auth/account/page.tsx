@@ -5,9 +5,9 @@ import { useRouter } from 'next/navigation';
 
 import { useAuth } from "@/app/utils/fbAuth";
 
-export default function account() {
+export default function Account() {
     const router = useRouter();
-    const { user, loading: authLoading } = useAuth(); 
+    const { user } = useAuth(); 
 
     const handleLogout = async () => {
         await logoutUser(); 

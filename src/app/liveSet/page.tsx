@@ -14,7 +14,7 @@ import { useAuth } from "../utils/fbAuth";
 import SetList from '@/components/setCards';
 import Modal from '@/components/modal';
 
-export default function liveSets() {
+export default function LiveSets() {
     const searchParams = useSearchParams();
     const setName = searchParams.get("setName");
     const { user, loading: authLoading } = useAuth();  // Get user from custom hook

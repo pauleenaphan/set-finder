@@ -2,8 +2,8 @@ import { getOauth } from "./tokenAPI";
 import { formatDate } from "../utils/format";
 import { SetResult, RankedSet } from "@/types/setTypes";
 
-import { deleteDoc, addDoc, collection, doc, getDoc, setDoc, getDocs } from "firebase/firestore";
-import { auth, db } from "./firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "./firebase";
 
 // Fetches live sets from SoundCloud and YouTube, then ranks and returns them
 export const fetchSets = async (setName: string) => {
@@ -26,13 +26,13 @@ export const fetchSets = async (setName: string) => {
     console.log("SoundCloud Sets:", scSets);
     console.log("YouTube Sets:", ytSets);
 
-    let listOfSets: RankedSet[] = [];
+    const listOfSets: RankedSet[] = [];
 
     // Merges both SoundCloud and YouTube results while avoiding duplicate titles
     const findSetByTitle = (title: string) => listOfSets.find(set => set.title === title);
 
     [...scSets, ...ytSets].forEach(set => {
-        let existingSet = findSetByTitle(set.title);
+        const existingSet = findSetByTitle(set.title);
         if (existingSet) {
             existingSet.platforms.push(set);
         } else {
@@ -213,7 +213,7 @@ export const fetchWeeklyNewSets = async () =>{
         : [];
 
     }catch(error){
-        console.error("Error fetching weekly sets");
+        console.error("Error fetching weekly sets", error);
         return [];
     }
 }
@@ -229,7 +229,7 @@ export const fetchWeeklyTrendingSets = async () =>{
         : [];
 
     }catch(error){
-        console.error("Error fetching weekly sets");
+        console.error("Error fetching weekly sets", error);
         return [];
     }
 }

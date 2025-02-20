@@ -9,8 +9,8 @@ import SetList from "@/components/setCards";
 import { SetResult } from "@/types/setTypes";
 import Modal from "@/components/modal";
 
-export default function explore(){
-    const { user, loading: authLoading } = useAuth(); 
+export default function Explore(){
+    const { user } = useAuth(); 
     const [newSets, setNewSets] = useState<SetResult[]>([]);
     const [trendingSets, setTrendingSets] = useState<SetResult[]>([]);
 

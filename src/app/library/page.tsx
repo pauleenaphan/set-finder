@@ -9,7 +9,7 @@ import { UserLikesParam } from "@/types/setTypes";
 import SetList from "@/components/setCards";
 import Modal from "@/components/modal";
 
-export default function library(){
+export default function Library(){
     const [currTab, setCurrTab] = useState<string>("likes");
     const [userLikes, setUserLikes] = useState<UserLikesParam[]>([]); // temp string for now
     const [likedSets, setLikedSets] = useState<{ [key: string]: boolean }>({});
