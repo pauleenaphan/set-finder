@@ -18,7 +18,7 @@
     "@types/node": "^22.13.3",
     "dotenv": "^16.4.7",
     "firebase-admin": "^11.11.1",
-    "firebase-functions": "^3.24.1",
+    "firebase-functions": "^4.9.0",
     "long": "^5.3.0"
   },
   "devDependencies": {
