@@ -5,6 +5,9 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { FaClipboardList, FaHeart, FaMusic } from "react-icons/fa";
+import { IoIosSearch } from "react-icons/io";
+import { IoHeartOutline } from "react-icons/io5";
+import { CiHeadphones } from "react-icons/ci";
 import { MdKeyboardArrowRight, MdKeyboardArrowDown } from "react-icons/md";
 
 import "../app/styles/home.css";
@@ -26,102 +29,96 @@ export default function Home() {
   ];
 
   return (
-    <main className="flex flex-col gap-60 mb-60">
-        <section className="mt-[3%]">
-          <div className="flex gap-1 items-center justify-center overflow-x-hidden mb-10">
-            <div className="coloredBead bg-yellow-400"></div>
-            <div className="coloredBead bg-pink-400"></div>
-            <div className="coloredBead bg-red-400"></div>
-            <div className="coloredBead bg-purple-400"></div>
-            <div className="coloredBead bg-blue-400"></div>
-            <div className="coloredBead bg-pink-400 "></div>
-            <div className="coloredBead bg-green-400"></div>
-            <div className="coloredBead bg-blue-400 "></div>
-            <div className="text-5xl"> - </div>
-            <div className="kandiTitle flex items-center">
-              <div className="kandiLetterContainer flex">
-                <div className="letterBead text-neonPink "> S </div>
-                <div className="letterBead text-neonBlue"> E </div>
-                <div className="letterBead text-neonGreen"> T </div>
-              </div>
-              {/* <div className="text-5xl"> - </div> */}
-              <div className="kandiLetterContainer flex">
-                <div className="letterBead text-neonOrange"> F </div>
-                <div className="letterBead text-neonBlue"> I </div>
-                <div className="letterBead text-neonPurple"> N </div>
-                <div className="letterBead text-neonPink"> D </div>
-                <div className="letterBead text-neonGreen"> E </div>
-                <div className="letterBead text-neonOrange"> R </div>
-              </div>
-            </div>
-            <div className="text-5xl"> - </div>
-            <div className="coloredBead bg-yellow-400"></div>
-            <div className="coloredBead bg-pink-400"></div>
-            <div className="coloredBead bg-red-400"></div>
-            <div className="coloredBead bg-pink-400"></div>
-            <div className="coloredBead bg-blue-400"></div>
-            <div className="coloredBead bg-pink-400 "></div>
-            <div className="coloredBead bg-green-400"></div>
-            <div className="coloredBead bg-blue-400 "></div>
-          </div>
-          <div className="flex gap-5 justify-center items-center  flex-col">
-            <p className="caption text-3xl text-gray-300 w-1/2 text-center mb-8"> 
-              Missed a set? Come find it! A dedicated platform for 
-              discovering live EDM sets from YouTube and SoundCloud—all in one place.
-            </p>
-            <Link href="/explore" className="ctaBtn"> Discover Sets </Link>
-          </div>
-        </section>
+    <main className="flex flex-col gap-64 mb-60">
+      <section className="w-2/3 mx-auto">
+        <h1 className="text-5xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
+        <p className="caption text-center w-2/3 mx-auto"> 
+          Easily find live DJ sets from across the web and save them all in one place.
+          Organize your favorites and access them anytime. 
+        </p>
+        <button className="ctaBtn block mx-auto"> Start Exploring </button>
+      </section>
 
-      <section id="about" className="bg-gray-900 py-20">
-        <div className="w-2/3 mx-auto">
-          <div className="text-center">
-              <p className="text-gray-300"> ABOUT US </p>
-              <h1 className="text-center text-5xl my-8 tracking-wide text-neonBlue"> All Your EDM Live Sets in One Place </h1>
-          </div>
-          <p className="caption text-2xl text-gray-300"> 
-            Set Finder is a dedicated platform for discovering live EDM sets. We know how 
-            frustrating it can be to track down sets scattered across different platforms. 
-            With Set Finder, you can keep all your favorite sets in one place, making it easier 
-            than ever to relive the music you love. Missed Lost Lands 2024 because your wallet 
-            said no? No worries—find the set and experience the moment through the eyes of 
-            someone who was there.
-          </p>
+      <section id="usage" className="w-2/3 mx-auto">
+        <h2 className="text-4xl"> Easy to Use: </h2>
+        <div className="flex justify-between gap-10 w-full">
+          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3">
+            <div className="flex justify-between">
+              <div>
+                <p className="pb-1"> 01 </p>
+                <strong className="text-2xl"> Search </strong>
+              </div>
+              <IoIosSearch className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
+            </div>
+            <p className="caption"> Find a set that you want to relive or missed out on </p>
+          </span>
+          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3">
+            <div className="flex justify-between">
+              <div>
+                <p className="pb-1"> 02 </p>
+                <strong className="text-2xl"> Save </strong>
+              </div>
+              <IoHeartOutline className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
+            </div>
+            <p className="caption"> Like a set to instantly save it to your library for easy access </p>
+          </span>
+          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3">
+            <div className="flex justify-between">
+              <div>
+                <p className="pb-1"> 03 </p>
+                <strong className="text-2xl"> Listen </strong>
+              </div>
+              <CiHeadphones className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
+            </div>
+            <p className="caption"> Pick a set and listen on the platform where it was uploaded </p>
+          </span>
         </div>
       </section>
         
-        <section id="features" className="w-2/3 mx-auto "> 
-          <div className="text-center">
-            <p className="text-gray-300"> OUR FEATURES </p>
-            <h2 className="text-center text-5xl my-8 tracking-wide text-neonBlue"> Explore, Save, and Share Your Favorite Sets </h2>
-          </div>
-            <div className="featureContainer flex gap-10">
-              <article className="homeCard">
-                <p className="text-2xl font-bold"> All in One Platform </p>
-                <FaClipboardList className="featureIcon text-8xl"/>
-                <p className="text-lg"> Search for uploaded sets from youtube and soundcloud all in one place </p>
-              </article>
-              <article className="homeCard">
-                <p className="text-2xl font-bold"> Like & Save Sets </p>
-                <FaHeart className="featureIcon text-8xl"/>
-                <p className="text-lg"> Keep track of the sets you enjoy the most by liking and creating playlist </p>
-              </article>
-              <article className="homeCard">
-                <p className="text-2xl font-bold"> Discover New Sets </p>
-                <FaMusic className="featureIcon text-8xl"/>
-                <p className="text-lg"> Explore new and trending EDM sets and expand your collection </p>
-              </article>
-            </div>
+        <section className="w-2/3 mx-auto flex justify-between"> 
+          <span className="w-1/2">
+            <h3 className="text-4xl"> Make New Discoveries </h3>
+            <p className="caption"> 
+              Easily browse the latest DJ sets. Keeping up with what's trending and
+              finding new relases every week. 
+            </p>
+            <a href="" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </a>
+          </span>
+          <img src="" alt="rave"></img>
         </section>
 
-        <section id="faq" className="bg-gray-900 py-20">
-          <h3 className="text-5xl font-bold w-2/3 mx-auto text-neonBlue"> FAQ </h3>
-          <ul className="mt-4 w-2/3 mx-auto">
+        <section className="w-2/3 mx-auto flex justify-between">
+          <img src="" alt="rave"></img>
+          <span className="w-1/2">
+            <h4 className="text-4xl"> Find Sets Across Multiple Platforms </h4>
+            <p className="caption"> 
+              Search and acess different dj sets from various platforms like 
+              youtube and soundcloud.
+            </p>
+            <button className="ctaBtn"> Find Sets </button> 
+          </span>
+        </section>
+
+        <section className="bg-secondaryBg">
+          <div className="w-2/3 mx-auto py-20 flex flex-col items-center">
+            <h5 className="text-4xl"> Why <span className="purpleHighlight"> SetFinder? </span></h5>
+            <p className="caption"> 
+              Dj sets are scattered across different platforms. Setfinder makes it 
+              easy to find, saave, and access them all from one convenient library.
+            </p>
+            <button className="ctaBtn"> Get Started </button>
+          </div>
+          
+        </section>
+
+        <section id="faq" className="py-20 w-2/3 mx-auto">
+          <h6 className="text-4xl"> FAQ </h6>
+          <ul>
             {faqs.map((faq, index) => (
               <li key={index} className="border-b py-4">
                 <button 
                   onClick={() => toggleQuestion(index)} 
-                  className="text-xl flex w-full justify-between text-left"
+                  className="text-xl flex w-full justify-between text-left font-semibold tracking-wide"
                 >
                   {faq.question}
                   {openQuestion === index ? (
@@ -135,17 +132,11 @@ export default function Home() {
                     openQuestion === index ? "max-h-40 opacity-100" : "max-h-0 opacity-0"
                   }`}
                 >
-                  <p className="p-2 text-gray-300">{faq.answer}</p>
+                  <p className="text-captionColor font-semibold p-2 tracking-wider">{faq.answer}</p>
                 </div>
               </li>
             ))}
           </ul>
-        </section>
-
-        <section className="text-center w-2/3 mx-auto">
-          <p className="text-gray-300"> Get Started </p>
-          <h4 className="text-5xl my-8 tracking-wide text-neonBlue"> All Your Favorite Sets, One Platform. Start Now! </h4>
-          <button className="ctaBtn"> Explore Sets </button>
         </section>
     </main>
   );

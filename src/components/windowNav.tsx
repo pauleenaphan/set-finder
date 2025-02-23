@@ -5,9 +5,7 @@ import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 
-import { IoSearch } from "react-icons/io5";
-
-import logo from "../assets/setfinderLogo2.png";
+import logo from "../assets/setFinderLogo.png";
 
 import "../app/styles/nav.css";
 
@@ -29,12 +27,12 @@ export default function WindowNav(){
     };
 
     return(
-        <nav className="navBar flex justify-between px-12 py-8 items-center gap-32 mb-[8%]">
-            <Link href="/" className="logo w-[300px]" >
+        <nav className="navBar flex justify-between px-20 py-6 items-center gap-32 mb-[10%]">
+            <Link href="/" className="logo w-[12%]" >
                 <Image src={logo} alt="setfinder logo"/>
             </Link>
             
-            <div className="relative text-lg">
+            {/* <div className="relative text-lg">
                 <div className="flex gap-2 items-center w-[300px]">
                     <input
                         type="text"
@@ -54,15 +52,15 @@ export default function WindowNav(){
                         <IoSearch size={20} />
                     </button>
                 </div>
-            </div>
+            </div> */}
 
-            <div className="navLinks flex gap-6 text-xl items-center tracking-[2px]">
-                <Link href="/explore" className="hover:opacity-60">EXPLORE</Link>
-                <Link href="/library" className="hover:opacity-60">LIBRARY</Link>
+            <div className="flex gap-6 text-xl items-center tracking-wider">
+                <Link href="/explore" className="hover:opacity-60">Explore</Link>
+                <Link href="/library" className="hover:opacity-60">Library</Link>
                 {isLoggedIn ? (
-                    <Link href="/auth/account" className="hover:opacity-60">ACCOUNT</Link>
+                    <Link href="/auth/account" className="hover:opacity-60">Account</Link>
                 ) : (
-                    <Link href="/auth/signup" className="ctaBtn">SIGN UP</Link>
+                    <Link href="/auth/signup" className="ctaBtn">Sign Up</Link>
                 )}
             </div>
             

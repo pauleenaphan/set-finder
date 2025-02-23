@@ -10,7 +10,7 @@ import { FaMusic, FaUser } from "react-icons/fa";
 import { MdCollectionsBookmark } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 
-import logo from "../assets/setfinderLogo2.png";
+import logo from "../assets/setFinderLogo.png";
 import { RxHamburgerMenu } from "react-icons/rx";
 
 import "../app/styles/nav.css";

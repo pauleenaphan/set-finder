@@ -16,7 +16,12 @@ export default {
         neonOrange: "#FF6700",  
         neonPurple: "#9D00FF", 
         neonHotPinkRed: "#ff1f6b",
-        cardBg: "#131313"
+        cardBg: "#131313",
+
+        secondaryBg: "#1A1D1D",
+        lightGray: "#2c2e2e",
+        primaryPurple: "#9185FF",
+        captionColor: "#B6B6B6",
       },
     },
   },
