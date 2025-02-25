@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 import { useState } from "react";
 
@@ -14,6 +15,7 @@ import "../app/styles/home.css";
 
 // First page that user sees 
 export default function Home() {
+  const router = useRouter();
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
@@ -36,7 +38,7 @@ export default function Home() {
           Easily find live DJ sets from across the web and save them all in one place.
           Organize your favorites and access them anytime. 
         </p>
-        <button className="ctaBtn block mx-auto"> Start Exploring </button>
+        <Link className="ctaBtn block mx-auto" href="/explore" > Start Exploring </Link>
       </section>
 
       <section id="usage" className="w-2/3 mx-auto">
@@ -82,7 +84,7 @@ export default function Home() {
               Easily browse the latest DJ sets. Keeping up with what's trending and
               finding new relases every week. 
             </p>
-            <a href="" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </a>
+            <Link href="Explore" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </Link>
           </span>
           <Image src="/assets/raveImg1.jpg" alt="svdden death set" 
             className="rounded-lg" width={500} height={500}></Image>
@@ -97,7 +99,7 @@ export default function Home() {
               Search and acess different dj sets from various platforms like 
               youtube and soundcloud.
             </p>
-            <button className="ctaBtn"> Find Sets </button> 
+            <Link className="ctaBtn" href="/explore"> Find Sets </Link> 
           </span>
         </section>
 
