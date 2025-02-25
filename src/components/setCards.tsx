@@ -39,7 +39,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                       ) : (
                         <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
                       )}
-                      <p className="tracking-wide text-captioColor">Posted: {platform.publishedDate}</p>
+                      <p className="tracking-wide font-semibold text-captionColor">Posted: {platform.publishedDate}</p>
                     </a>
                   </div>
                 ))}

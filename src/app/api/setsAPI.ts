@@ -28,9 +28,23 @@ export const fetchSets = async (setName: string) => {
 
     const listOfSets: RankedSet[] = [];
 
-    // Merges both SoundCloud and YouTube results while avoiding duplicate titles
-    const findSetByTitle = (title: string) => listOfSets.find(set => set.title === title);
+    // cleans up the string before comparing
+    const normalizeTitle = (title: string): string => {
+        return title
+            .toLowerCase()               // Convert to lowercase to handle case insensitivity
+            .replace(/[@\-]/g, ' ')       // Replace @ and - with a space (you can choose to remove them)
+            .replace(/[^\w\s]/gi, '')     // Remove all non-word and non-space characters
+            .replace(/\s+/g, ' ')         // Replace multiple spaces with a single space
+            .trim();                      // Trim leading/trailing spaces
+    };
 
+    // Function to find a set by normalized title
+    const findSetByTitle = (title: string) => {
+        const normalizedTitle = normalizeTitle(title);
+        return listOfSets.find(set => normalizeTitle(set.title) === normalizedTitle);
+    };
+
+    // Merging sets while avoiding duplicates based on normalized titles
     [...scSets, ...ytSets].forEach(set => {
         const existingSet = findSetByTitle(set.title);
         if (existingSet) {
@@ -79,7 +93,7 @@ export const getSoundCloudSets = async (setNameOrList: string | string[]) => {
                 title: track.title,
                 publishedDate: formatDate(track.created_at),
                 link: track.permalink_url,
-                thumbnail: track.artwork_url ? track.artwork_url.replace(/large/, 't500x500') : "",
+                thumbnail: track.artwork_url ? track.artwork_url.replace(/large/, 't500x500') : null,
             }));
         } catch (error) {
             console.error("Error fetching SoundCloud sets:", error);
@@ -103,7 +117,7 @@ export const getSoundCloudSets = async (setNameOrList: string | string[]) => {
                     title: track.title,
                     publishedDate: formatDate(track.created_at),
                     link: track.permalink_url,
-                    thumbnail: track.artwork_url || "",
+                    thumbnail: track.artwork_url ? track.artwork_url.replace(/large/, 't500x500') : null,
                 };
             }));
 

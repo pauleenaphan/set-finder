@@ -1,15 +1,22 @@
 "use client"
+
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
+
+import { IoSearch } from "react-icons/io5";
+
 import { fetchWeeklyNewSets, fetchWeeklyTrendingSets } from "../api/setsAPI";
 import { useAuth } from "../utils/fbAuth";
 import { checkLike, removeLike, addLike } from "../api/likesAPI";
 
 import SetList from "@/components/setCards";
-
-import { SingleSet } from "@/types/setTypes";
 import Modal from "@/components/modal";
 
+import { SingleSet } from "@/types/setTypes";
+
+
 export default function Explore(){
+    const router = useRouter();
     const { user } = useAuth(); 
     const [newSets, setNewSets] = useState<SingleSet[]>([]);
     const [trendingSets, setTrendingSets] = useState<SingleSet[]>([]);
@@ -18,6 +25,8 @@ export default function Explore(){
     const [likedNewSets, setNewLikedSets] = useState<{ [key: string]: boolean }>({});
 
     const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
+
+    const [inputSet, setInputSet] = useState<string>("");
 
     const getWeekly = async () =>{
         const weekSetResults = await fetchWeeklyNewSets();
@@ -102,17 +111,45 @@ export default function Explore(){
         }
     };
 
+    const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            router.push(`/liveSet?setName=${encodeURIComponent(inputSet)}`);
+        }
+    };
+
 
     return(
-        <main className="mb-40 w-4/5 mx-auto flex gap-40 flex-col">
+        <main className="mb-40 w-4/5 mx-auto">
+            <div className="relative text-lg mb-20">
+                <div className="flex gap-2 items-center">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        onChange={(e) => setInputSet(e.target.value)}
+                        value={inputSet}
+                        required
+                        className="searchBar p-4 px-5 rounded-xl border-[3px] border-white bg-transparent outline-none w-[100%] text-xl tracking-wider font-bold"
+                        onKeyDown={handleKeyPress}
+                    />
+                    <button
+                        onClick={() => {
+                            router.push(`/liveSet?setName=${encodeURIComponent(inputSet)}`);
+                        }}
+                        className="searchBtn absolute right-5 top-1/2 transform -translate-y-1/2"
+                    >
+                        <IoSearch size={25} />
+                    </button>
+                </div>
+            </div>
+
             <Modal
                 title="You are not logged in"
                 description="Please login to like a set"
                 isOpen={loggedInModal}
                 onClose={() =>{ setLoggedInModal(false) }}
             />
-            <section>
-                <h1 className="text-3xl tracking-wider"> Trending Sets </h1> 
+            <section className="mb-40">
+                <h1 className="text-3xl tracking-wider -mb-2"> Trending Sets </h1> 
                 {trendingSets.length > 0 ? (
                     <div className="overflow-x-auto">
                         <SetList
@@ -129,7 +166,7 @@ export default function Explore(){
             </section>
 
             <section>
-                <h2 className="text-3xl tracking-wider"> Newest Releases</h2>
+                <h2 className="text-3xl tracking-wider -mb-2"> Newest Releases</h2>
                 {newSets.length > 0 ? (
                     <div className="overflow-x-auto">
                         <SetList

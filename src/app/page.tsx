@@ -1,10 +1,13 @@
 "use client"
 
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from 'next/navigation';
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { IoIosSearch } from "react-icons/io";
 import { IoHeartOutline } from "react-icons/io5";
@@ -30,21 +33,33 @@ export default function Home() {
     { question: "How can I support SetFinder?", answer: "You can support by buying the creator a Ko-fi!" },
   ];
 
+  useEffect(() =>{
+    AOS.init({
+      duration: 800,  // Default duration for all animations
+      easing: 'ease-in-out',  // Default easing for all animations
+      once: true,  
+      mirror: false,  
+    });
+  })
+
   return (
-    <main className="flex flex-col gap-64 mb-60">
-      <section id="about" className="w-2/3 mx-auto">
-        <h1 className="text-5xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
-        <p className="caption text-center w-2/3 mx-auto"> 
-          Easily find live DJ sets from across the web and save them all in one place.
-          Organize your favorites and access them anytime. 
-        </p>
-        <Link className="ctaBtn block mx-auto" href="/explore" > Start Exploring </Link>
+    <main className="flex flex-col gap-48 mb-60">
+      <section id="about" className="w-2/3 mx-auto mb-[10%]">
+        <div data-aos="fade-in" data-aos-duration="1000">
+          <h1 className="text-6xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
+          <p className="caption text-center w-2/3 mx-auto"> 
+            Easily find live DJ sets from across the web and save them all in one place.
+            Organize your favorites and access them anytime. 
+          </p>
+        </div>
+        
+        <Link className="ctaBtn block mx-auto w-fit" href="/explore" data-aos="fade-in" data-aos-duration="1000"> Start Exploring </Link>
       </section>
 
       <section id="usage" className="w-2/3 mx-auto">
         <h2 className="text-4xl"> Easy to Use: </h2>
         <div className="flex justify-between gap-10 w-full">
-          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3">
+          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 01 </p>
@@ -54,7 +69,7 @@ export default function Home() {
             </div>
             <p className="caption"> Find a set that you want to relive or missed out on </p>
           </span>
-          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3">
+          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 02 </p>
@@ -64,7 +79,7 @@ export default function Home() {
             </div>
             <p className="caption"> Like a set to instantly save it to your library for easy access </p>
           </span>
-          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3">
+          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 03 </p>
@@ -84,7 +99,7 @@ export default function Home() {
               Easily browse the latest DJ sets. Keeping up with what's trending and
               finding new relases every week. 
             </p>
-            <Link href="Explore" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </Link>
+            <Link href="/explore" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </Link>
           </span>
           <Image src="/assets/raveImg1.jpg" alt="svdden death set" 
             className="rounded-lg" width={500} height={500}></Image>
@@ -95,22 +110,22 @@ export default function Home() {
             className="rounded-lg" width={500} height={500}></Image>
           <span className="w-1/2">
             <h4 className="text-4xl"> Find Sets Across Multiple Platforms </h4>
-            <p className="caption"> 
+            <p className="caption py-2"> 
               Search and acess different dj sets from various platforms like 
               youtube and soundcloud.
             </p>
-            <Link className="ctaBtn" href="/explore"> Find Sets </Link> 
+            <Link href="/explore" className="ctaBtn"> Find Sets </Link> 
           </span>
         </section>
 
         <section className="bg-secondaryBg">
-          <div className="w-2/3 mx-auto py-20 flex flex-col items-center">
+          <div className="w-2/3 mx-auto py-20 flex flex-col items-center" data-aos="fade-up" data-aos-duration="1000">
             <h5 className="text-4xl"> Why <span className="purpleHighlight"> SetFinder? </span></h5>
             <p className="caption"> 
               Dj sets are scattered across different platforms. Setfinder makes it 
               easy to find, saave, and access them all from one convenient library.
             </p>
-            <button className="ctaBtn"> Get Started </button>
+            <Link href="/explore" className="ctaBtn"> Get Started </Link>
           </div>
           
         </section>

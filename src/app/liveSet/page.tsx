@@ -89,7 +89,7 @@ function LiveSets() {
 
     if(authLoading || loading){
         return( 
-            <div className="w-4/5 mx-auto text-xl"> Loading Results... </div>
+            <div className="w-4/5 mx-auto text-xl font-bold"> Loading Results... </div>
         )
     }
 
@@ -101,7 +101,7 @@ function LiveSets() {
                 isOpen={loggedInModal}
                 onClose={() =>{ setLoggedInModal(false)}}
             />
-            <h1 className="text-3xl text-neonBlue"> Results For: {setName} </h1>
+            <h1 className="text-3xl"> Results For: <span className='purpleHighlight'>{setName}</span> </h1>
             <SetList
                 status="searchResults"
                 setResults={setResults}
