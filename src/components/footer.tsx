@@ -8,12 +8,13 @@ import "../app/styles/footer.css";
 
 export function Footer(){
     return(
-        <footer className="bg-gray-900 w-full p-32 mt-40">
+        <footer className="bg-secondaryBg w-full p-32 mt-40 font-medium tracking-wide">
             <div className="mx-auto flex gap-32 justify-between mb-24 flex-wrap">
                 <div className="linkHeadList flex gap-32 flex-wrap">
                     <ul className="flex flex-col gap-1">
-                        <li className="underline text-xl"> Company </li>
+                        <li className="underline text-xl font-semibold"> Company </li>
                         <Link href="/#about"> About Us </Link>
+                        <Link href="/#usage"> Usage </Link>
                         <Link href="/#features"> Features </Link>
                         <Link href="/#faq"> FAQ </Link>
                         <a href="https://ko-fi.com/pauleenaphan" target="_blank"> Support </a>
@@ -21,7 +22,7 @@ export function Footer(){
                     </ul>
                     
                     <ul className="flex flex-col gap-1">
-                        <li className="underline text-xl"> Contact </li>
+                        <li className="underline text-xl font-semibold"> Contact </li>
                         <div className="flex items-center gap-1">
                             <IoMdMail />
                             <li> EdmSetFinder@gmail.com </li>

@@ -46,13 +46,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 600; /* semi bold */
+    font-weight: bolder; 
     margin-bottom: 20px;
     letter-spacing: 2px;
 }
 
 .caption{
-    letter-spacing: 2px;
+    letter-spacing: 1.5px;
     font-size: 18px;
     color: var(--captionColor);
     font-weight: 600;

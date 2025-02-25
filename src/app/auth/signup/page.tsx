@@ -43,9 +43,9 @@ export default function SignupForm() {
     return (
         <main className="mb-40">
             <form onSubmit={() =>{ signUp("email") }} className="authForm flex flex-col gap-10 w-1/3 mx-auto">
-                <h1 className="text-5xl text-neonBlue text-center"> Welcome to Setfinder! </h1>
+                <h1 className="text-4xl text-center leading-tight"> Welcome to Setfinder! </h1>
                 <div className="inputContainer">
-                    <label htmlFor="email" className="inputLabel">EMAIL:</label>
+                    <label htmlFor="email" className="inputLabel">Email:</label>
                     <input
                         type="email"
                         id="email"
@@ -59,7 +59,7 @@ export default function SignupForm() {
                 </div>
 
                 <div className="inputContainer">
-                    <label htmlFor="password" className="inputLabel">PASSWORD:</label>
+                    <label htmlFor="password" className="inputLabel">Password:</label>
                     <input
                         type="password"
                         id="password"
@@ -73,7 +73,7 @@ export default function SignupForm() {
                 </div>
 
                 <div className="inputContainer">
-                    <label htmlFor="confirmPassword" className="inputLabel">CONFIRM PASSWORD:</label>
+                    <label htmlFor="confirmPassword" className="inputLabel"> Confirm Password:</label>
                     <input
                         type="password"
                         id="confirmPassword"
@@ -93,12 +93,12 @@ export default function SignupForm() {
             <article onClick={() =>{ signUp("google") }}
                 className="googleBtn w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
                 <FcGoogle className="text-2xl"/>
-                <button className="text-xl"> Sign Up with Google </button>
+                <button className="text-xl font-semibold tracking-wider"> Sign Up with Google </button>
             </article>
             
-            <article className="oldUser flex gap-5 justify-center">
+            <article className="oldUser flex gap-5 justify-center tracking-wide">
                 <p> Already have an account? </p> 
-                <Link href="/auth/login" className="underline"> Login </Link>
+                <Link href="/auth/login" className="underline hover:opacity-80 font-semibold"> Login </Link>
             </article>
         </main>
     );

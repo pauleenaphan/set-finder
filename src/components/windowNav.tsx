@@ -5,8 +5,6 @@ import Image from 'next/image';
 import { useEffect, useState } from "react";
 import { useRouter } from 'next/navigation';
 
-import logo from "../assets/setFinderLogo.png";
-
 import "../app/styles/nav.css";
 
 export default function WindowNav(){
@@ -29,7 +27,7 @@ export default function WindowNav(){
     return(
         <nav className="navBar flex justify-between px-20 py-6 items-center gap-32 mb-[10%]">
             <Link href="/" className="logo w-[12%]" >
-                <Image src={logo} alt="setfinder logo"/>
+                <Image src="/assets/setFinderLogo.png" alt="setfinder logo" width={800} height={400}/>
             </Link>
             
             {/* <div className="relative text-lg">
@@ -54,7 +52,7 @@ export default function WindowNav(){
                 </div>
             </div> */}
 
-            <div className="flex gap-6 text-xl items-center tracking-wider">
+            <div className="flex gap-6 text-xl items-center tracking-widest font-semibold">
                 <Link href="/explore" className="hover:opacity-60">Explore</Link>
                 <Link href="/library" className="hover:opacity-60">Library</Link>
                 {isLoggedIn ? (

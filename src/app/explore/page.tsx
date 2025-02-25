@@ -112,7 +112,7 @@ export default function Explore(){
                 onClose={() =>{ setLoggedInModal(false) }}
             />
             <section>
-                <h1 className="text-neonBlue text-3xl tracking-wider"> TRENDING SETS  </h1> 
+                <h1 className="text-3xl tracking-wider"> Trending Sets </h1> 
                 {trendingSets.length > 0 ? (
                     <div className="overflow-x-auto">
                         <SetList
@@ -129,7 +129,7 @@ export default function Explore(){
             </section>
 
             <section>
-                <h2 className="text-neonBlue text-3xl tracking-wider"> NEWEST RELEASES </h2>
+                <h2 className="text-3xl tracking-wider"> Newest Releases</h2>
                 {newSets.length > 0 ? (
                     <div className="overflow-x-auto">
                         <SetList

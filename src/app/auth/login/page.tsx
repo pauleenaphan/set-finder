@@ -43,9 +43,9 @@ export default function LoginForm() {
         <main className="mb-40">
             <form onSubmit={() => { signIn("email") }}
                 className="authForm flex flex-col gap-10 w-1/3 mx-auto">
-                <h1 className="text-5xl text-neonBlue text-center"> Welcome Back!</h1>
+                <h1 className="text-4xl text-center"> Welcome Back!</h1>
                 <div className="inputContainer">
-                    <label htmlFor="email" className="inputLabel">EMAIL:</label>
+                    <label htmlFor="email" className="inputLabel">Email:</label>
                     <input
                         type="email"
                         id="email"
@@ -58,7 +58,7 @@ export default function LoginForm() {
                 </div>
                 
                 <div className="inputContainer">
-                    <label htmlFor="password" className="inputLabel">PASSWORD: </label>
+                    <label htmlFor="password" className="inputLabel">Password: </label>
                     <input
                         type="password"
                         id="password"
@@ -77,12 +77,12 @@ export default function LoginForm() {
             <article onClick={() =>{ signIn("google") }}
                 className="googleBtn w-1/3 mx-auto my-10 flex flex-row items-center gap-5 justify-center hover:bg-gray-300 hover:text-black cursor-pointer">
                 <FcGoogle className="text-2xl"/>
-                <button className="text-xl"> Sign in with Google </button>
+                <button className="text-xl font-semibold tracking-wider"> Sign in with Google </button>
             </article>
             
-            <div className="newUser flex gap-5 justify-center">
+            <div className="newUser flex gap-5 justify-center tracking-wide">
                 <p> New User? </p> 
-                <Link href="/auth/signup" className="underline"> Create an Account </Link>
+                <Link href="/auth/signup" className="underline font-semibold hover:opacity-80"> Create an Account </Link>
             </div>
         </main>
         

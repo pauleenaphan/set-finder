@@ -1,10 +1,10 @@
 "use client"
 
 import Link from "next/link";
+import Image from "next/image";
 
 import { useState } from "react";
 
-import { FaClipboardList, FaHeart, FaMusic } from "react-icons/fa";
 import { IoIosSearch } from "react-icons/io";
 import { IoHeartOutline } from "react-icons/io5";
 import { CiHeadphones } from "react-icons/ci";
@@ -30,7 +30,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col gap-64 mb-60">
-      <section className="w-2/3 mx-auto">
+      <section id="about" className="w-2/3 mx-auto">
         <h1 className="text-5xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
         <p className="caption text-center w-2/3 mx-auto"> 
           Easily find live DJ sets from across the web and save them all in one place.
@@ -46,7 +46,7 @@ export default function Home() {
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 01 </p>
-                <strong className="text-2xl"> Search </strong>
+                <strong className="text-2xl tracking-wider"> Search </strong>
               </div>
               <IoIosSearch className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
             </div>
@@ -56,7 +56,7 @@ export default function Home() {
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 02 </p>
-                <strong className="text-2xl"> Save </strong>
+                <strong className="text-2xl tracking-wider"> Save </strong>
               </div>
               <IoHeartOutline className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
             </div>
@@ -66,7 +66,7 @@ export default function Home() {
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 03 </p>
-                <strong className="text-2xl"> Listen </strong>
+                <strong className="text-2xl tracking-wider"> Listen </strong>
               </div>
               <CiHeadphones className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
             </div>
@@ -75,7 +75,7 @@ export default function Home() {
         </div>
       </section>
         
-        <section className="w-2/3 mx-auto flex justify-between"> 
+        <section id="features" className="w-2/3 mx-auto flex justify-between items-center gap-20"> 
           <span className="w-1/2">
             <h3 className="text-4xl"> Make New Discoveries </h3>
             <p className="caption"> 
@@ -84,11 +84,13 @@ export default function Home() {
             </p>
             <a href="" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </a>
           </span>
-          <img src="" alt="rave"></img>
+          <Image src="/assets/raveImg1.jpg" alt="svdden death set" 
+            className="rounded-lg" width={500} height={500}></Image>
         </section>
 
-        <section className="w-2/3 mx-auto flex justify-between">
-          <img src="" alt="rave"></img>
+        <section className="w-2/3 mx-auto flex justify-between items-center gap-20">
+          <Image src="/assets/raveImg2.jpg" alt="Hard Summer Stage"
+            className="rounded-lg" width={500} height={500}></Image>
           <span className="w-1/2">
             <h4 className="text-4xl"> Find Sets Across Multiple Platforms </h4>
             <p className="caption"> 

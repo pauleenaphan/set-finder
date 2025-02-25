@@ -6,13 +6,15 @@
 
 .inputLabel{
     letter-spacing: 2px;
+    font-weight: bold;
 }
 
 .inputField, .googleBtn{
-    background-color: var(--darkBg);
+    background-color: var(--mainBg);
     border: 2px solid rgb(126, 126, 126);
     padding: 20px;
     border-radius: 10px;
+    letter-spacing: 1px;
 }
 
 .inputFieldInCorrect{

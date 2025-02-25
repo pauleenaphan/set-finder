@@ -1,4 +1,4 @@
-import {onSchedule} from 'firebase-functions/v2/scheduler';
+import {onSchedule} from "firebase-functions/v2/scheduler";
 import * as logger from "firebase-functions/logger";
 import * as admin from "firebase-admin";
 import * as dotenv from "dotenv";
@@ -25,12 +25,20 @@ function formatDate(rawDate: string | number | Date): string {
 export const fetchLiveEDMSets = onSchedule("every sunday 00:00", async () => {
   logger.info("Fetching new EDM live sets...");
 
-  const firstDayOfMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString();
+  // gets first day of the month for trending sets
+  const currentYear = new Date().getFullYear();
+  const currentMonth = new Date().getMonth();
+  const firstDayOfMonth = new Date(currentYear, currentMonth, 1).toISOString();
+
+  // gets current week for newest sets
+  const startOfWeek = new Date();
+  startOfWeek.setDate(startOfWeek.getDate() - startOfWeek.getDay());
+  startOfWeek.setHours(0, 0, 0, 0); // Set to midnight
 
   try {
     // Gets newest YouTube sets
     const ytNewestSetsResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=live%20EDM%20set&maxResults=10&type=video&order=date&publishedAfter=${firstDayOfMonth}&key=${process.env.YT_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=live%20EDM%20set&maxResults=10&type=video&order=relevance&publishedAfter=${startOfWeek.toISOString()}&key=${process.env.YT_API_KEY}`
     );
     const ytNewestSetsData = await ytNewestSetsResponse.json();
 
@@ -56,7 +64,7 @@ export const fetchLiveEDMSets = onSchedule("every sunday 00:00", async () => {
 
     // Gets trending YouTube sets
     const ytTrendingSetsResponse = await fetch(
-      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=live%20EDM%20set&maxResults=10&type=video&order=rating&key=${process.env.YT_API_KEY}`
+      `https://www.googleapis.com/youtube/v3/search?part=snippet&q=live%20EDM%20set&maxResults=10&type=video&order=relevance&publishedAfter=${firstDayOfMonth}&key=${process.env.YT_API_KEY}`
     );
 
     const ytTrendingSetsData = await ytTrendingSetsResponse.json();

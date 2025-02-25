@@ -10,8 +10,9 @@ import { FaMusic, FaUser } from "react-icons/fa";
 import { MdCollectionsBookmark } from "react-icons/md";
 import { IoIosClose } from "react-icons/io";
 
-import logo from "../assets/setFinderLogo.png";
 import { RxHamburgerMenu } from "react-icons/rx";
+
+// import logo from "../assets/setFinderLogo.png";
 
 import "../app/styles/nav.css";
 
@@ -45,7 +46,7 @@ export default function MobileNav(){
     return(
         <nav className="navBar flex px-12 justify-between py-8 items-center gap-32 mb-[8%]">
             <Link href="/" className="logo w-[20%]" onClick={closeMenu}>
-                <Image src={logo} alt="setfinder logo"/>
+                <Image src={""} alt="setfinder logo"/>
             </Link>
 
             <div className="flex gap-4 text-2xl">

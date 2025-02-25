@@ -84,9 +84,9 @@ export default function Library(){
             <div className="flex gap-10 text-3xl mb-4 font-bold">
             <button
                 onClick={() => setCurrTab("likes")}
-                className={`currTab pb-1 ${currTab === "likes" ? "border-b-2 border-neonBlue text-neonBlue" : ""} tracking-wider`}
+                className={`currTab pb-1 ${currTab === "likes" ? "border-b-2 border-white" : ""} tracking-wider`}
             >
-                LIKES 
+                Likes
             </button>
             {/* <button
                 onClick={() => setCurrTab("playlist")}
@@ -102,7 +102,7 @@ export default function Library(){
                         setResults={userLikes}
                         likedSets={likedSets}
                         handleLikeStatus={handleLikeStatus}
-                        style="flex flex-wrap justify-between gap-8"
+                        style="flex flex-wrap justify-between gap-5"
                     />
                 </section>
                 

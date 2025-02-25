@@ -14,7 +14,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as SetData[]).map((set: SetData, index: number) => (
             <div
               key={index}
-              className="setCard bg-[#1e1a33] rounded-lg shadow-xl rounded-lg w-[32%] flex flex-col gap-5 p-5 justify-between"
+              className="setCard bg-secondaryBg rounded-lg shadow-xl rounded-lg w-[32%] flex flex-col gap-5 p-5 justify-between"
             >
               <div>
                 <img
@@ -22,7 +22,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                   alt="Platform Thumbnail"
                   className="w-full"
                 />
-                <p className="font-bold text-xl mt-5">{set.title}</p>
+                <p className="font-bold text-xl mt-5 tracking-wider">{set.title}</p>
               </div>
               
               <div>
@@ -39,7 +39,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                       ) : (
                         <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
                       )}
-                      <p>Posted: {platform.publishedDate}</p>
+                      <p className="tracking-wide text-captioColor">Posted: {platform.publishedDate}</p>
                     </a>
                   </div>
                 ))}
@@ -68,7 +68,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
           (setResults as UserLikesParam[]).map((set: UserLikesParam, index: number) => (
             <div
               key={index}
-              className="setCard bg-[#1e1a33] rounded-lg shadow-xl w-[32%] flex flex-col gap-5 p-5 justify-between"
+              className="setCard bg-secondaryBg rounded-lg shadow-xl w-[32%] flex flex-col gap-5 p-5 justify-between"
             >
               <div>
                 <img
@@ -76,7 +76,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                   alt="Platform Thumbnail"
                   className="w-full"
                 />
-                <p className="font-bold text-xl mt-5">{set.title}</p>
+                <p className="font-bold text-xl mt-5 tracking-wider">{set.title}</p>
               </div>
               
               <div>
@@ -92,7 +92,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
                     ) : (
                       <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
                     )}
-                    <p>Posted: {set.publishedDate}</p>
+                    <p className="tracking-wide font-semibold text-captionColor">Posted: {set.publishedDate}</p>
                   </a>
                 </div>
                 <div className="flex justify-end">
