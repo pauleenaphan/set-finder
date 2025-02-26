@@ -1,6 +1,5 @@
 [build]
   command = "npm run build"
-  functions = "functions/lib"
 
 [functions]
   directory = "functions/lib"  # Ensure Netlify looks at the lib directory
