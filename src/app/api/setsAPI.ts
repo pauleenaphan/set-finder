@@ -1,6 +1,6 @@
 import { getOauth } from "./tokenAPI";
 import { formatDate } from "../utils/format";
-import { SingleSet, RankedSet, YouTubeSet, SoundCloudSet } from "@/types/setTypes";
+import { SingleSet, YouTubeSet, SoundCloudSet } from "@/types/setTypes";
 
 import { mergeAndRankSets } from "../utils/sets";
 

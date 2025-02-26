@@ -18,7 +18,7 @@ function LiveSets() {
     const searchParams = useSearchParams();
     const setName = searchParams.get("setName");
 
-    const { user, loading: authLoading } = useAuth(); 
+    const { loading: authLoading } = useAuth(); 
     const [loading, setLoading] = useState(true);
 
     const [setResults, setSetResults] = useState<SetData[]>([]);

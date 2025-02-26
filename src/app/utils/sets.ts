@@ -1,5 +1,4 @@
 // Any set related helper functions like checking for matching titles
-
 import { RankedSet, SingleSet } from "@/types/setTypes";
 
 // Function to merge and sort sets

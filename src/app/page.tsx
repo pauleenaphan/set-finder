@@ -5,7 +5,6 @@ import 'aos/dist/aos.css';
 
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from 'next/navigation';
 
 import { useEffect, useState } from "react";
 
@@ -18,7 +17,7 @@ import "../app/styles/home.css";
 
 // First page that user sees 
 export default function Home() {
-  const router = useRouter();
+  // const router = useRouter();
   const [openQuestion, setOpenQuestion] = useState<number | null>(null);
 
   const toggleQuestion = (index: number) => {
@@ -96,7 +95,7 @@ export default function Home() {
           <span className="w-1/2">
             <h3 className="text-4xl"> Make New Discoveries </h3>
             <p className="caption"> 
-              Easily browse the latest DJ sets. Keeping up with what's trending and
+              Easily browse the latest DJ sets. Keeping up with current trending sets and
               finding new relases every week. 
             </p>
             <Link href="/explore" className="underline text-lg tracking-wide hover:opacity-80"> Explore Trending Sets </Link>

@@ -15,7 +15,7 @@ export default function Library(){
     const [userLikes, setUserLikes] = useState<SetData[]>([]); // temp string for now
     const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
 
-    const { user, loading: authLoading } = useAuth(); 
+    const { user } = useAuth(); 
 
     useEffect(() => {
         if(localStorage.getItem("setFinderIsLogged") === "false"){

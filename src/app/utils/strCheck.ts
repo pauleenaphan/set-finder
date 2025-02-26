@@ -1,5 +1,3 @@
-import { SingleSet } from "@/types/setTypes";
-
 // Checks for string and separates based on @ 
 export function separateStr(strInput: string){
     const index = strInput.indexOf('@');
