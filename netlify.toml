@@ -1,5 +1,3 @@
 [build]
-  command = "npm run build"
-
-[functions]
-  directory = "functions/lib"  # Ensure Netlify looks at the lib directory
+  command = "npm run build"  # Build command for your Next.js app
+  publish = ".next"          # Next.js output folder
