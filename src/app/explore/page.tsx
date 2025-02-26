@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
-
 import { IoSearch } from "react-icons/io5";
 
 import { fetchWeeklyNewSets, fetchWeeklyTrendingSets } from "../api/setsAPI";
@@ -29,6 +28,7 @@ export default function Explore(){
     const [inputSet, setInputSet] = useState<string>("");
 
     const getWeekly = async () =>{
+        console.log("fetching weekly sets")
         const weekSetResults = await fetchWeeklyNewSets();
         setNewSets(weekSetResults);
 
@@ -128,7 +128,7 @@ export default function Explore(){
                         onChange={(e) => setInputSet(e.target.value)}
                         value={inputSet}
                         required
-                        className="searchBar p-4 px-5 rounded-xl border-[3px] border-white bg-transparent outline-none w-[100%] text-xl tracking-wider font-bold"
+                        className="searchBar p-4 px-5 rounded-xl border-[3px] focus:border-white border-secondaryBg bg-secondaryBg outline-none w-[100%] text-xl tracking-wider font-bold"
                         onKeyDown={handleKeyPress}
                     />
                     <button

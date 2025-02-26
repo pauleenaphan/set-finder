@@ -18,7 +18,7 @@ const SetList: React.FC<SetListProps> = ({ status, setResults, likedSets, handle
             >
               <div>
                 <img
-                  src={set.platforms[0].thumbnail}
+                  src={set.platforms[0].thumbnail ? set.platforms[0].thumbnail : set.platforms[1].thumbnail}
                   alt="Platform Thumbnail"
                   className="w-full"
                 />

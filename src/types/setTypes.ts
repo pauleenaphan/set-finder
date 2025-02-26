@@ -11,7 +11,7 @@ export interface PlatformData{
     id: string;
     publishedDate?: string;
     link: string;
-    thumbnail?: string; // Can be either a string (URL) or an object with `url`, `width`, `height`
+    thumbnail?: string; 
 };
 
 // Putting set data into firebase
@@ -42,6 +42,11 @@ export interface SetListProps {
     setResults: SetData[] | UserLikesParam[];
     likedSets: Record<string, boolean>;
     handleLikeStatus: (id: string, liked: boolean) => void;
+    style: string;
+}
+
+export interface SetCardResults {
+    setResults: SetData[];
     style: string;
 }
 

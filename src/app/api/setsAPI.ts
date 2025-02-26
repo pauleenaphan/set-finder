@@ -2,6 +2,8 @@ import { getOauth } from "./tokenAPI";
 import { formatDate } from "../utils/format";
 import { SingleSet, RankedSet, YouTubeSet, SoundCloudSet } from "@/types/setTypes";
 
+import { mergeAndRankSets } from "../utils/sets";
+
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "./firebase";
 
@@ -26,44 +28,7 @@ export const fetchSets = async (setName: string) => {
     console.log("SoundCloud Sets:", scSets);
     console.log("YouTube Sets:", ytSets);
 
-    const listOfSets: RankedSet[] = [];
-
-    // cleans up the string before comparing
-    const normalizeTitle = (title: string): string => {
-        return title
-            .toLowerCase()               // Convert to lowercase to handle case insensitivity
-            .replace(/[@\-]/g, ' ')       // Replace @ and - with a space (you can choose to remove them)
-            .replace(/[^\w\s]/gi, '')     // Remove all non-word and non-space characters
-            .replace(/\s+/g, ' ')         // Replace multiple spaces with a single space
-            .trim();                      // Trim leading/trailing spaces
-    };
-
-    // Function to find a set by normalized title
-    const findSetByTitle = (title: string) => {
-        const normalizedTitle = normalizeTitle(title);
-        return listOfSets.find(set => normalizeTitle(set.title) === normalizedTitle);
-    };
-
-    // Merging sets while avoiding duplicates based on normalized titles
-    [...scSets, ...ytSets].forEach(set => {
-        const existingSet = findSetByTitle(set.title);
-        if (existingSet) {
-            existingSet.platforms.push(set);
-        } else {
-            listOfSets.push({ title: set.title, platforms: [set] });
-        }
-    });
-
-    // Rank sets based on relevance
-    const rankSets = (set: RankedSet): number => {
-        return set.title.toLowerCase().includes(setName.toLowerCase())
-            ? set.title.toLowerCase().split(setName.toLowerCase()).length - 1
-            : 0;
-    };
-
-    // Assign and sort by match score
-    listOfSets.forEach(set => (set.matchScore = rankSets(set)));
-    const sortedLiveSets = listOfSets.sort((a, b) => (b.matchScore || 0) - (a.matchScore || 0));
+    const sortedLiveSets = mergeAndRankSets(scSets, ytSets, setName);
 
     console.log("Sorted live sets:", sortedLiveSets);
     return sortedLiveSets;
@@ -158,15 +123,21 @@ export const getYoutubeSets = async (setNameOrList: string | string[]) => {
         }
     }else{
         try {
-            const videoDetailsPromises = setNameOrList.map(async (videoId) => {
+            const videoDetailsPromises = await Promise.all(setNameOrList.map(async (id: string) => {
+                console.log("current youtube id request", id);
                 const response = await fetch(
-                    `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${videoId}&key=${process.env.NEXT_PUBLIC_YT_API_KEY}`
+                    `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${id}&key=${process.env.NEXT_PUBLIC_YT_API_KEY}`
                 );
 
                 if (!response.ok) throw new Error("Failed to fetch YouTube video details");
 
                 const data = await response.json();
                 const item = data.items[0];
+
+                if (!data.items || data.items.length === 0) {
+                    console.error(`No video details found for ID: ${id}`);
+                    return null; // or handle the error gracefully, such as returning an empty object
+                }
 
                 return {
                     platform: "yt",
@@ -176,10 +147,10 @@ export const getYoutubeSets = async (setNameOrList: string | string[]) => {
                     link: `https://www.youtube.com/watch?v=${item.id}`,
                     thumbnail: item.snippet.thumbnails.maxres?.url || item.snippet.thumbnails.high.url,
                 };
-            });
+            }));
 
-            // Wait for all the promises to resolve
-            return await Promise.all(videoDetailsPromises);
+            
+            return videoDetailsPromises;
         } catch (error) {
             console.error("Error fetching YouTube video details:", error);
             return [];
@@ -225,7 +196,8 @@ export const fetchWeeklyNewSets = async () =>{
         return docSnap.exists()
         ? Object.values(docSnap.data()?.ytNewestSets || {}) as SingleSet[] // Type cast here
         : [];
-
+        // TODO: grab new sets from soundcloud and merge/organize them 
+        // TODO: return them as Setdata
     }catch(error){
         console.error("Error fetching weekly sets", error);
         return [];
