@@ -38,6 +38,7 @@ export default function Explore(){
 
     useEffect(()=>{
         getWeekly();
+        document.title = "SetFinder | Explore Trending and Newest Sets";
     }, []);
 
     // Fetch likes for each set

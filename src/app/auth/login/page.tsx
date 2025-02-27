@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from 'next/navigation';
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import "../../styles/auth.css";
 
@@ -18,6 +18,10 @@ export default function LoginForm() {
     const [password, setPassword] = useState<string>("");
 
     const [errorMsg, setErrorMsg] = useState<string>("");
+
+    useEffect(()=>{
+        document.title = "SetFinder | Login";
+    }, []);
 
     const signIn = async(platform: string) =>{
         let results;

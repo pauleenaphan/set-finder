@@ -30,6 +30,10 @@ function LiveSets() {
         }
     };
 
+    useEffect(()=>{
+        document.title = `SetFinder | Search Results for ${setName}`;
+    }, []);
+
     // Fetch sets when setName changes
     useEffect(() => {
         if (authLoading) return;

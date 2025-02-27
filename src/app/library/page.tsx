@@ -20,6 +20,10 @@ export default function Library(){
 
     const { user } = useAuth(); 
 
+    useEffect(()=>{
+        document.title = "SetFinder | Your Library";
+    }, []);
+
     useEffect(() => {
         if(localStorage.getItem("setFinderIsLogged") === "false"){
             setLoggedInModal(true);

@@ -1,5 +1,5 @@
 "use client"
-
+import { useEffect } from "react";
 import { logoutUser } from "@/app/api/authAPI";
 import { useRouter } from 'next/navigation';
 
@@ -8,6 +8,10 @@ import { useAuth } from "@/app/utils/fbAuth";
 export default function Account() {
     const router = useRouter();
     const { user } = useAuth(); 
+
+    useEffect(()=>{
+        document.title = "SetFinder | My Account";
+    }, []);
 
     const handleLogout = async () => {
         await logoutUser(); 

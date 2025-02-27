@@ -41,6 +41,10 @@ export default function Home() {
     });
   })
 
+  useEffect(() => {
+    document.title = "SetFinder | Find New Sets Today";
+  }, []);
+
   return (
     <main className="flex flex-col gap-48 mb-60">
       <section id="about" className="z-0 w-2/3 mx-auto mb-[10%]">

@@ -41,6 +41,9 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/assets/setFinderIcon.png"></link>
+      </head>
       <body>
         {isMobile ? <MobileNav/> : <WindowNav/>}
         {children}
