@@ -36,7 +36,9 @@ export default function Library(){
                 title="You are not logged in"
                 description="Please login to view your library"
                 isOpen={loggedInModal}
-                onClose={() =>{ setLoggedInModal(false), router.push("/auth/login") }}
+                onClose={() =>{ 
+                    setLoggedInModal(false)
+                    router.push("/auth/login") }}
             />
             <div className="flex gap-10 text-3xl mb-4 font-bold">
             <button

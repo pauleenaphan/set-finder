@@ -69,7 +69,7 @@ export default function Explore(){
 
         fetchLikes();
 
-    }, [trendingSets, user]);  
+    }, [user]);  
     
     // For Trending liked sets 
     const handleLikeStatus = async (setId: string, status: boolean) => {
