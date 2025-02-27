@@ -1,28 +1,16 @@
-@media(max-width: 768px){
-    .navBar{
-        padding: 30px 20px;
-    }
-
-    .logo{
-        width: 200px;
-    }
-
-    .searchBar{
-        display: none;
-    }
-
-    .searchBtn{
-        display: none;
-    }
-}
-
 @media(max-width: 1280px){
-    .logo{
-        width: 250px;
+    .logoContainer{
+        width: 150px;
     }
 
     .navLinks{
         font-size: 18px;
+    }
+}
+
+@media(max-width: 768px){
+    .logoContainer{
+        width: 150px;
     }
 }
 

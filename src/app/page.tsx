@@ -43,7 +43,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col gap-48 mb-60">
-      <section id="about" className="w-2/3 mx-auto mb-[10%]">
+      <section id="about" className="z-0 w-2/3 mx-auto mb-[10%]">
         <div data-aos="fade-in" data-aos-duration="1000">
           <h1 className="text-6xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
           <p className="caption text-center w-2/3 mx-auto"> 
@@ -57,42 +57,42 @@ export default function Home() {
 
       <section id="usage" className="w-2/3 mx-auto">
         <h2 className="text-4xl"> Easy to Use: </h2>
-        <div className="flex justify-between gap-10 w-full">
-          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
+        <div className="useCardContainer flex justify-between gap-10 w-full">
+          <span className="useCard flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 01 </p>
                 <strong className="text-2xl tracking-wider"> Search </strong>
               </div>
-              <IoIosSearch className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
+              <IoIosSearch className="useCardIcon text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
             </div>
             <p className="caption"> Find a set that you want to relive or missed out on </p>
           </span>
-          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
+          <span className="useCard flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 02 </p>
                 <strong className="text-2xl tracking-wider"> Save </strong>
               </div>
-              <IoHeartOutline className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
+              <IoHeartOutline className="useCardIcon text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
             </div>
             <p className="caption"> Like a set to instantly save it to your library for easy access </p>
           </span>
-          <span className="flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
+          <span className="useCard flex flex-col gap-5 bg-secondaryBg p-8 rounded-md w-1/3" data-aos="fade up" data-aos-duration="1000">
             <div className="flex justify-between">
               <div>
                 <p className="pb-1"> 03 </p>
                 <strong className="text-2xl tracking-wider"> Listen </strong>
               </div>
-              <CiHeadphones className="text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
+              <CiHeadphones className="useCardIcon text-5xl text-primaryPurple bg-lightGray p-3 rounded-md gap-5"/>
             </div>
             <p className="caption"> Pick a set and listen on the platform where it was uploaded </p>
           </span>
         </div>
       </section>
         
-        <section id="features" className="w-2/3 mx-auto flex justify-between items-center gap-20"> 
-          <span className="w-1/2">
+        <section id="features" className="featureBlockContainer w-2/3 mx-auto flex justify-between items-center gap-20"> 
+          <span className="featureTextBlock w-1/2">
             <h3 className="text-4xl"> Make New Discoveries </h3>
             <p className="caption"> 
               Easily browse the latest DJ sets. Keeping up with current trending sets and
@@ -104,10 +104,10 @@ export default function Home() {
             className="rounded-lg" width={500} height={500}></Image>
         </section>
 
-        <section className="w-2/3 mx-auto flex justify-between items-center gap-20">
+        <section className="featureBlockContainerTwo w-2/3 mx-auto flex justify-between items-center gap-20">
           <Image src="/assets/raveImg2.jpg" alt="Hard Summer Stage"
             className="rounded-lg" width={500} height={500}></Image>
-          <span className="w-1/2">
+          <span className="featureTextBlock w-1/2">
             <h4 className="text-4xl"> Find Sets Across Multiple Platforms </h4>
             <p className="caption py-2"> 
               Search and acess different dj sets from various platforms like 

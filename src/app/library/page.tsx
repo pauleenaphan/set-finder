@@ -10,7 +10,10 @@ import { SetData } from "@/types/setTypes";
 import { SetList } from "@/components/setCardsTwo";
 import Modal from "@/components/modal";
 
+import { useRouter } from 'next/navigation';
+
 export default function Library(){
+    const router = useRouter();
     const [currTab, setCurrTab] = useState<string>("likes");
     const [userLikes, setUserLikes] = useState<SetData[]>([]); // temp string for now
     const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
@@ -33,7 +36,7 @@ export default function Library(){
                 title="You are not logged in"
                 description="Please login to view your library"
                 isOpen={loggedInModal}
-                onClose={() =>{ setLoggedInModal(false) }}
+                onClose={() =>{ setLoggedInModal(false), router.push("/auth/login") }}
             />
             <div className="flex gap-10 text-3xl mb-4 font-bold">
             <button
@@ -53,12 +56,12 @@ export default function Library(){
                 <section className="">
                     <SetList
                         setResults={userLikes}
-                        style="flex flex-wrap gap-3 justify-between"
+                        style="flex flex-wrap gap-y-10 justify-center md:justify-between sm:justify-center"
                     />
                 </section>
                 
             ) : (
-                <p>Displaying Playlist</p>
+                <p className="caption">Displaying Playlist</p>
             )}
         </main>
     )

@@ -4,11 +4,14 @@ import { ImYoutube, ImSoundcloud2 } from 'react-icons/im';
 import { SetCardResults, SetData } from '@/types/setTypes';
 import { useAuth } from "../app/utils/fbAuth";
 
+import Modal from "@/components/modal";
+
 import { removeLike, addLike, checkLike } from '@/app/api/likesAPI';
 
 export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
     const { user, loading: authLoading } = useAuth(); 
     const [likedSets, setLikedSets] = useState<{ [key: string]: boolean }>({});
+    const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
 
     // Fetch likes for each set
     useEffect(() => {
@@ -37,7 +40,7 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
 
     const handleLikeStatus = async (setId: string, status: boolean) => {
         if(localStorage.getItem("setFinderIsLogged") === "false"){
-            // setLoggedInModal(true);
+            setLoggedInModal(true);
             return;
         }
 
@@ -56,12 +59,18 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
     };
 
     return(
-        <div className={`${style}`}>
+        <div className={style}>
+            <Modal
+                title="You are not logged in"
+                description="Please login to like a set"
+                isOpen={loggedInModal}
+                onClose={() =>{ setLoggedInModal(false)}}
+            />
             {(setResults as SetData[]).length > 0 ? (
                 (setResults as SetData[]).map((set: SetData, index: number) => (
                 <div
                     key={index}
-                    className="setCard bg-secondaryBg rounded-lg shadow-xl rounded-lg w-[24%] flex flex-col gap-5 p-5 justify-between"
+                    className="setCard bg-secondaryBg rounded-lg shadow-xl sm:w-[100%] md:w-[32%] xl:w-[24%] flex flex-col gap-5 p-5 justify-between"
                 >
                     <div>
                         <img
@@ -108,7 +117,7 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
                 </div>
                 ))
             ) : (
-                <p>Loading Results...</p>
+                <p className="caption">Loading Results...</p>
             )}
         </div>
     )

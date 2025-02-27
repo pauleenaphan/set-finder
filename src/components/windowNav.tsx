@@ -16,8 +16,8 @@ export default function WindowNav(){
     }, []); // This will run only once when the component mounts
 
     return(
-        <nav className="navBar flex justify-between px-20 py-6 items-center gap-32 mb-[10%]">
-            <Link href="/" className="logo w-[12%]" >
+        <nav className="navBar flex justify-between px-[5%] py-6 items-center gap-32 mb-[10%]">
+            <Link href="/" className="logo w-[180px]" >
                 <Image src="/assets/setFinderLogo.png" alt="setfinder logo" width={800} height={400}/>
             </Link>
 

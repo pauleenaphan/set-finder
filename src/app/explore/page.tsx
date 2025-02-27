@@ -161,7 +161,7 @@ export default function Explore(){
                         />
                     </div>
                 ) : (
-                    <p>Loading trending sets...</p>
+                    <p className="caption mt-4">Loading trending sets...</p>
                 )}
             </section>
 
@@ -178,7 +178,7 @@ export default function Explore(){
                         />
                     </div>
                 ) : (
-                    <p>Loading trending sets...</p>
+                    <p className="caption mt-4">Loading trending sets...</p>
                 )}
             </section>
 

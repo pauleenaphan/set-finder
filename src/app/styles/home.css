@@ -32,53 +32,49 @@
     background-color: #000;
 }
 
-@media(max-width: 768px){
-    /* headings  */
-    .text-5xl{
-        font-size: 38px;
-    }
-    
-    .kandiTitle{
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
-
-    .letterBead{
-        font-size: 40px;
-        min-width: 60px;
-        min-height: 60px;
-        border-radius: 15px;
-    }
-
-    .coloredBead{
-        min-width: 50px;
-        min-height: 50px;
-        border-radius: 10px;
-    }
-
-    .caption{
-        text-align: center;
-        font-size: 18px;
-    }
-    .featureContainer{
-        flex-direction: column;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-
-    .featureIcon{
-        font-size: 50px;
-    }
-    
-    .homeCard{
-        width: 80%;
-    }
-}
-
 @media(max-width: 1280px){
     .featureIcon{
         font-size: 60px;
     }
 
+}
+
+@media(max-width: 768px){
+    /* headings  */
+    .text-6xl{
+        font-size: 40px;
+    }
+
+    .caption{
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .text-4xl{
+        font-size: 30px;
+    }
+    
+    .useCardContainer{
+        flex-wrap: wrap;
+    }
+
+    .useCard{
+        width: 100%;
+    }
+    
+    .useCardIcon{
+        font-size: 50px;
+    }
+
+    .featureBlockContainer{
+        flex-wrap: wrap;
+    }
+
+    .featureBlockContainerTwo{
+        flex-wrap: wrap-reverse;
+    }
+
+    .featureTextBlock{
+        width: 100%;
+    }
 }

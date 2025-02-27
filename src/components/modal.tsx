@@ -12,7 +12,7 @@ if (!isOpen) return null; // Don't render if not open
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
             onClick={onClose}
         >
-            <div className="relative bg-bgColor p-6 rounded-lg shadow-lg w-96 text-center">
+            <div className="relative bg-secondaryBg p-6 rounded-lg shadow-lg w-96 text-center">
                 {/* Close Button (X) - Now correctly positioned inside the modal */}
                 <button 
                     onClick={onClose} 
@@ -23,15 +23,14 @@ if (!isOpen) return null; // Don't render if not open
 
                 <div className="my-4">
                     <h1 className="text-xl font-bold">{title}</h1>
-                    <p className="text-gray-400">{description}</p>
+                    <p className="text-captionColor font-semibold tracking-wider">{description}</p>
                 </div>
                 
-
                 <button 
                     onClick={onClose} 
-                    className="mt-4 bg-neonHotPinkRed text-white px-4 py-2 rounded font-bold hover:bg-pink-700"
+                    className="mt-4 bg-ctaColor text-black font-bold tracking-wider px-4 py-2 rounded hover:opacity-80"
                 >
-                    CLOSE
+                    Close
                 </button>
             </div>
         </div>

@@ -11,7 +11,6 @@ import { useAuth } from "../utils/fbAuth";
 
 // import SetList from '@/components/setCards';
 import { SetList } from '@/components/setCardsTwo';
-import Modal from '@/components/modal';
 
 function LiveSets() {
     const router = useRouter();
@@ -22,8 +21,6 @@ function LiveSets() {
     const [loading, setLoading] = useState(true);
 
     const [setResults, setSetResults] = useState<SetData[]>([]);
-
-    const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
 
     const [inputSet, setInputSet] = useState<string>("");
 
@@ -52,18 +49,12 @@ function LiveSets() {
 
     if(authLoading || loading){
         return( 
-            <div className="w-4/5 mx-auto text-xl font-bold tracking-wider"> Loading Results... </div>
+            <div className="caption w-4/5 mx-auto"> Loading Results... </div>
         )
     }
 
     return (
         <div className="w-4/5 mx-auto">
-            <Modal
-                title="You are not logged in"
-                description="Please login to like a set"
-                isOpen={loggedInModal}
-                onClose={() =>{ setLoggedInModal(false)}}
-            />
             <div className="relative text-lg mb-20">
                 <div className="flex gap-2 items-center">
                     <input
@@ -100,7 +91,7 @@ function LiveSets() {
 // Since we are using useSearchParams we need to make sure the component is rendered in the browser 
 // Suspense allows us to wait for async operrations to finish before we render the component 
 const SuspendedLiveSets = () => (
-    <Suspense fallback={<div className="w-4/5 mx-auto text-xl font-bold">Loading...</div>}>
+    <Suspense fallback={<div className="caption w-4/5 mx-auto">Loading...</div>}>
         <LiveSets />
     </Suspense>
 );
