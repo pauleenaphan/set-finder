@@ -53,12 +53,12 @@ function LiveSets() {
 
     if(authLoading || loading){
         return( 
-            <div className="caption w-4/5 mx-auto"> Loading Results... </div>
+            <div className="caption w-4/5 mx-auto mt-[8%]"> Loading Results... </div>
         )
     }
 
     return (
-        <div className="w-4/5 mx-auto">
+        <div className="w-4/5 mx-auto mt-[8%]">
             <div className="relative text-lg mb-20">
                 <div className="flex gap-2 items-center">
                     <input
@@ -85,7 +85,8 @@ function LiveSets() {
             <div className='searchResultsSetListOuter'>
                 <SetList
                     setResults={setResults}
-                    style="flex flex-wrap gap-3 justify-between"
+                    // style="flex flex-wrap gap-3 justify-between"
+                    style="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-3"
                 />
             </div>
         </div>
@@ -95,7 +96,7 @@ function LiveSets() {
 // Since we are using useSearchParams we need to make sure the component is rendered in the browser 
 // Suspense allows us to wait for async operrations to finish before we render the component 
 const SuspendedLiveSets = () => (
-    <Suspense fallback={<div className="caption w-4/5 mx-auto">Loading...</div>}>
+    <Suspense fallback={<div className="caption w-4/5 mx-auto mt-[8%]">Loading...</div>}>
         <LiveSets />
     </Suspense>
 );

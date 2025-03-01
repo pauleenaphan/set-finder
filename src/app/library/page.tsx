@@ -35,7 +35,7 @@ export default function Library(){
     }, [currTab, user]);
 
     return(
-        <main className="mb-40 w-4/5 mx-auto">
+        <main className="mb-40 w-4/5 mx-auto mt-[8%]">
             <Modal
                 title="You are not logged in"
                 description="Please login to view your library"
@@ -62,7 +62,7 @@ export default function Library(){
                 <section className="">
                     <SetList
                         setResults={userLikes}
-                        style="flex flex-wrap gap-y-10 justify-center md:justify-between sm:justify-center"
+                        style="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-3"
                     />
                 </section>
                 

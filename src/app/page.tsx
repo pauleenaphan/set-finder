@@ -47,17 +47,22 @@ export default function Home() {
 
   return (
     <main className="flex flex-col gap-48 mb-60">
-      <section id="about" className="z-0 w-2/3 mx-auto mb-[10%]">
-        <div data-aos="fade-in" data-aos-duration="1000">
-          <h1 className="text-6xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
-          <p className="caption text-center w-2/3 mx-auto"> 
-            Easily find live DJ sets from across the web and save them all in one place.
-            Organize your favorites and access them anytime. 
-          </p>
-        </div>
-        
-        <Link className="ctaBtn block mx-auto w-fit" href="/explore" data-aos="fade-in" data-aos-duration="1000"> Start Exploring </Link>
-      </section>
+      <div style={{ backgroundImage: `url("/assets/heroBg.gif")`, backgroundSize: 'cover', backgroundPosition: "50% 70%", backgroundRepeat: 'no-repeat' }}
+        className="py-[15%] relative" 
+      >
+        <div className='absolute inset-0 bg-gray-900 opacity-90'></div>
+        <section id="about" className="z-0 w-2/3 mx-auto">
+          <div data-aos="fade-in" data-aos-duration="1000">
+            <h1 className="text-6xl text-center leading-tight"> <span className="purpleHighlight">Discover</span> and <span className="purpleHighlight">Save</span> Your Favorite Live DJ Sets All in <span className="purpleHighlight">One Place</span> </h1>
+            <p className="caption text-center w-2/3 mx-auto"> 
+              Easily find live DJ sets from across the web and save them all in one place.
+              Organize your favorites and access them anytime. 
+            </p>
+          </div>
+          <Link className="ctaBtn block mx-auto w-fit" href="/explore" data-aos="fade-in" data-aos-duration="1000"> Start Exploring </Link>
+        </section>
+      </div>
+      
 
       <section id="usage" className="w-2/3 mx-auto">
         <h2 className="text-4xl"> Easy to Use: </h2>

@@ -3,9 +3,10 @@ interface ModalProps {
     description: string;
     isOpen: boolean;
     onClose: () => void;
+    children?: React.ReactNode;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, description, isOpen, onClose }) => {
+const Modal: React.FC<ModalProps> = ({ title, description, isOpen, onClose, children }) => {
 if (!isOpen) return null; // Don't render if not open
 
     return (
@@ -25,7 +26,7 @@ if (!isOpen) return null; // Don't render if not open
                     <h1 className="text-xl font-bold">{title}</h1>
                     <p className="text-captionColor font-semibold tracking-wider">{description}</p>
                 </div>
-                
+                <div> {children} </div>
                 <button 
                     onClick={onClose} 
                     className="mt-4 bg-ctaColor text-black font-bold tracking-wider px-4 py-2 rounded hover:opacity-80"

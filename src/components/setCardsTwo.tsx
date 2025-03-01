@@ -1,10 +1,15 @@
 import { useState, useEffect } from 'react';
 import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { ImYoutube, ImSoundcloud2 } from 'react-icons/im';
+import { FaPlus } from "react-icons/fa6";
+
 import { SetCardResults, SetData } from '@/types/setTypes';
 import { useAuth } from "../app/utils/fbAuth";
 
 import Modal from "@/components/modal";
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import { removeLike, addLike, checkLike } from '@/app/api/likesAPI';
 
@@ -12,6 +17,21 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
     const { user, loading: authLoading } = useAuth(); 
     const [likedSets, setLikedSets] = useState<{ [key: string]: boolean }>({});
     const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
+    const [playlistModal, setPlaylistModal] = useState<boolean>(false);
+
+    const [hoverPlaylist, setHoverPlaylist] = useState<{hover: boolean, setId: string}>({
+        hover: false, 
+        setId: " "
+    });
+
+    useEffect(() =>{
+    AOS.init({
+        duration: 400,  
+        easing: 'ease-in-out',  
+        once: true,  
+        mirror: false,  
+    });
+    })
 
     // Fetch likes for each set
     useEffect(() => {
@@ -58,19 +78,27 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
         }
     };
 
+    const hoveringPlaylist = (status: boolean, setId: string) =>{
+        if(status == false){ // mouse leave
+            setHoverPlaylist({ hover: status, setId: setId});
+            console.log(hoverPlaylist);
+        }else{ // mouse enter
+            setHoverPlaylist({ hover: status, setId: setId});
+            
+        }
+    }
+
     return(
         <div className={style}>
-            <Modal
-                title="You are not logged in"
-                description="Please login to like a set"
-                isOpen={loggedInModal}
-                onClose={() =>{ setLoggedInModal(false)}}
-            />
+            <Modal title="You are not logged in" description="Please login to like a set" isOpen={loggedInModal} onClose={() =>{ setLoggedInModal(false) }}/>
+            <Modal title="Your Playlists" description="Add set to your playlist" isOpen={ playlistModal } onClose={() =>{ setPlaylistModal(false) }}>
+                <p> Content here </p>
+            </Modal>
             {(setResults as SetData[]).length > 0 ? (
                 (setResults as SetData[]).map((set: SetData, index: number) => (
                 <div
                     key={index}
-                    className="setCard bg-secondaryBg rounded-lg shadow-xl sm:w-[100%] md:w-[32%] xl:w-[24%] flex flex-col gap-5 p-5 justify-between"
+                    className="setCard bg-secondaryBg rounded-lg shadow-xl p-5 flex flex-col gap-4 justify-between"
                 >
                     <div>
                         <img
@@ -85,22 +113,37 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
                     <div>
                         {set.platforms.map((platform, pIndex) => (
                             <div key={pIndex} className="text-lg hover:underline">
-                            <a
-                                href={platform.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-3"
-                            >
-                                {platform.platform === 'yt' ? (
-                                    <ImYoutube className="text-2xl text-red-500 bg-white p-[3px] rounded"/>
-                                ) : (
-                                    <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
-                                )}
-                                <p className="tracking-wide font-semibold text-captionColor">Posted: {platform.publishedDate}</p>
-                            </a>
+                                <a
+                                    href={platform.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="flex items-center gap-3"
+                                >
+                                    {platform.platform === 'yt' ? (
+                                        <ImYoutube className="text-2xl text-red-500 bg-white p-[3px] rounded"/>
+                                    ) : (
+                                        <ImSoundcloud2 className="text-2xl text-orange-500 bg-white rounded"/>
+                                    )}
+                                    <p className="tracking-wide font-semibold text-captionColor">Posted: {platform.publishedDate}</p>
+                                </a>
                             </div>
                         ))}
-                        <div className="flex justify-end">
+                        <div className="flex justify-between mt-6 gap-3 items-center">
+                            <button className="flex items-center gap-1 bg-lightGray rounded p-2 px-3"
+                                onMouseEnter={() =>{ hoveringPlaylist(true, set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id); }}
+                                onMouseLeave={() =>{ hoveringPlaylist(false, set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id); }}
+                                onClick={() =>{ /* open up modal for playlist input  */ console.log(hoverPlaylist.setId) }}
+                            >
+                                <FaPlus className='text-2xl'/>
+                                {/* slide in on hover */}
+                                { hoverPlaylist.hover ? (
+                                    <p className='tracking-wide text-[18px] font-semibold' data-aos="slide-right"
+                                    > Add to Playlist </p>
+                                ) : (
+                                    <div></div>
+                                )}
+                            </button>
+
                             {likedSets[(set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id)] ? (
                                 <FaHeart
                                     className="text-3xl cursor-pointer text-pink-500"

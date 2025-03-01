@@ -30,8 +30,8 @@ export default function MobileNav(){
     }
 
     return(
-        <nav className="navBar flex px-[5%] justify-between py-8 items-center gap-32 mb-[8%]">
-            <Link href="/" className="logo w-[20%]" onClick={closeMenu}>
+        <nav className="navBar flex px-[5%] justify-between items-center gap-32 mb-[8%]">
+            <Link href="/" className="logo w-[20%] py-3" onClick={closeMenu}>
                 <div className="logoContainer">
                     <Image className="logo" src="/assets/setFinderLogo.png" alt="setfinder logo" width={200} height={200}/>
                 </div>
