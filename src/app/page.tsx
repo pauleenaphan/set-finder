@@ -131,7 +131,7 @@ export default function Home() {
             <h5 className="text-4xl"> Why <span className="purpleHighlight"> SetFinder? </span></h5>
             <p className="caption"> 
               Dj sets are scattered across different platforms. Setfinder makes it 
-              easy to find, saave, and access them all from one convenient library.
+              easy to find, save, and access them all from one convenient library.
             </p>
             <Link href="/explore" className="ctaBtn"> Get Started </Link>
           </div>

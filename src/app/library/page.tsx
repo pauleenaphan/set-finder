@@ -45,18 +45,18 @@ export default function Library(){
                     router.push("/auth/login") }}
             />
             <div className="flex gap-10 text-3xl mb-4 font-bold">
-            <button
-                onClick={() => setCurrTab("likes")}
-                className={`currTab pb-1 ${currTab === "likes" ? "border-b-2 border-white" : ""} tracking-wider`}
-            >
-                Likes
-            </button>
-            {/* <button
-                onClick={() => setCurrTab("playlist")}
-                className={`pb-1 ${currTab === "playlist" ? "border-b-2 border-neonBlue text-neonBlue" : ""} tracking-wider`}
-            >
-                PLAYLIST
-            </button> */}
+                <button
+                    onClick={() => setCurrTab("likes")}
+                    className={`currTab pb-2 ${currTab === "likes" ? "border-b-2 border-white" : ""} tracking-wider`}
+                >
+                    Likes
+                </button>
+                <button
+                    onClick={() => setCurrTab("playlist")}
+                    className={`currTab pb-2 ${currTab === "playlist" ? "border-b-2 border-white" : ""} tracking-wider`}
+                >
+                    Playlists
+                </button>
             </div>
             {currTab === "likes" ? (
                 <section className="">

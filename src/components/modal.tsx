@@ -11,7 +11,7 @@ if (!isOpen) return null; // Don't render if not open
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
-            onClick={onClose}
+            // onClick={onClose}
         >
             <div className="relative bg-secondaryBg p-6 rounded-lg shadow-lg w-96 text-center">
                 {/* Close Button (X) - Now correctly positioned inside the modal */}

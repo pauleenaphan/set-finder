@@ -1,3 +1,4 @@
+// Types for live edm sets 
 // For yt and soundcloud imgs 
 export type Thumbnail = {
     url: string;
@@ -27,6 +28,7 @@ export interface LikeParams{
 }
 
 // Getting the sets that users likes 
+// soon to be removed after removing set cards 
 export interface UserLikesParam{
     id: string;
     link: string;
@@ -37,7 +39,8 @@ export interface UserLikesParam{
 }
 
 // Getting list of set cards props 
-export interface SetListProps {
+// soon to be removed after removing setCards
+export interface SetListProps{
     status: string;
     setResults: SetData[] | UserLikesParam[];
     likedSets: Record<string, boolean>;
@@ -45,13 +48,14 @@ export interface SetListProps {
     style: string;
 }
 
-export interface SetCardResults {
+// component to display the cards 
+export interface SetCardResults{
     setResults: SetData[];
     style: string;
 }
 
 // Single set 
-export interface SingleSet {
+export interface SingleSet{
     platform: string;
     id: string;
     title: string;
@@ -61,7 +65,7 @@ export interface SingleSet {
 }
 
 // Organized sets
-export interface RankedSet {
+export interface RankedSet{
     title: string;
     platforms: SingleSet[];
     matchScore?: number;

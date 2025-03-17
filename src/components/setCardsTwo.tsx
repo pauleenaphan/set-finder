@@ -5,8 +5,13 @@ import { FaPlus } from "react-icons/fa6";
 
 import { SetCardResults, SetData } from '@/types/setTypes';
 import { useAuth } from "../app/utils/fbAuth";
+import { createPlaylist } from '@/app/api/playlistAPI';
 
 import Modal from "@/components/modal";
+import { NewPlaylistForm } from './newPlaylistForm';
+import { Playlist } from '@/types/playlistTypes';
+import "../app/styles/auth.css";
+import { genres } from '@/app/data/setData';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -16,21 +21,28 @@ import { removeLike, addLike, checkLike } from '@/app/api/likesAPI';
 export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
     const { user, loading: authLoading } = useAuth(); 
     const [likedSets, setLikedSets] = useState<{ [key: string]: boolean }>({});
+
     const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
     const [playlistModal, setPlaylistModal] = useState<boolean>(false);
+    const [newPlaylistModal, setNewPlaylistModal] = useState<boolean>(false);
+
+    const [newPlaylistVals, setNewPlaylistVals] = useState<Playlist>({
+        name: "", description: "", tags: []
+    })
 
     const [hoverPlaylist, setHoverPlaylist] = useState<{hover: boolean, setId: string}>({
         hover: false, 
         setId: " "
     });
 
+    // Settings for aos animations
     useEffect(() =>{
-    AOS.init({
-        duration: 400,  
-        easing: 'ease-in-out',  
-        once: true,  
-        mirror: false,  
-    });
+        AOS.init({
+            duration: 400,  
+            easing: 'ease-in-out',  
+            once: true,  
+            mirror: false,  
+        });
     })
 
     // Fetch likes for each set
@@ -58,6 +70,7 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
     
     }, [setResults, user]); 
 
+    // Handles when user is liking/disliking a set 
     const handleLikeStatus = async (setId: string, status: boolean) => {
         if(localStorage.getItem("setFinderIsLogged") === "false"){
             setLoggedInModal(true);
@@ -78,6 +91,7 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
         }
     };
 
+    // Hovering over the playlist button 
     const hoveringPlaylist = (status: boolean, setId: string) =>{
         if(status == false){ // mouse leave
             setHoverPlaylist({ hover: status, setId: setId});
@@ -88,12 +102,44 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
         }
     }
 
+    // Handles new values when creating a new playlist 
+    const handleNewPlaylistChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value, type, checked } = event.target;
+    
+        if(type === "checkbox"){
+            // Handle checkbox changes (tags)
+            setNewPlaylistVals((prevState) => {
+                let newTags;
+                if(checked){
+                    newTags = [...prevState.tags, value];
+                }else{
+                    newTags = prevState.tags.filter((tag) => tag !== value);
+                }
+                return{ ...prevState, tags: newTags };
+            });
+        }else{
+            // Handle input changes (name or description)
+            setNewPlaylistVals((prevState) => ({
+                ...prevState,
+                [name]: value, // Update the field (either name or description)
+            }));
+        }
+    };
+
     return(
         <div className={style}>
-            <Modal title="You are not logged in" description="Please login to like a set" isOpen={loggedInModal} onClose={() =>{ setLoggedInModal(false) }}/>
+            <Modal title="You are not logged in" description="Please login to like a set" isOpen={ loggedInModal } onClose={() =>{ setLoggedInModal(false) }}/>
             <Modal title="Your Playlists" description="Add set to your playlist" isOpen={ playlistModal } onClose={() =>{ setPlaylistModal(false) }}>
-                <p> Content here </p>
+                <button onClick={() =>{ setNewPlaylistModal(true) }}> Add new playlist </button>
+                <p> List of user playlist here </p>
             </Modal>
+            {/* <Modal title="Create New Playlist" description="" isOpen={ newPlaylistModal } onClose={() =>{ setNewPlaylistModal(false) }}>
+                {user ? (
+                    <NewPlaylistForm userId={user.uid}></NewPlaylistForm>
+                ) : (
+                    setLoggedInModal(true);
+                )}
+            </Modal> */}
             {(setResults as SetData[]).length > 0 ? (
                 (setResults as SetData[]).map((set: SetData, index: number) => (
                 <div
@@ -132,7 +178,7 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
                             <button className="flex items-center gap-1 bg-lightGray rounded p-2 px-3"
                                 onMouseEnter={() =>{ hoveringPlaylist(true, set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id); }}
                                 onMouseLeave={() =>{ hoveringPlaylist(false, set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id); }}
-                                onClick={() =>{ /* open up modal for playlist input  */ console.log(hoverPlaylist.setId) }}
+                                onClick={() =>{ /* open up modal for playlist input  */ console.log(hoverPlaylist.setId); setPlaylistModal(true) }}
                             >
                                 <FaPlus className='text-2xl'/>
                                 {/* slide in on hover */}
