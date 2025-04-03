@@ -31,7 +31,10 @@ export const getAllUserPlaylist = async(userUid: string) =>{
     
         // Push each playlist into listOfPlaylist
         playlists.forEach((doc) => {
-            userPlaylistResult.listOfPlaylist.push(doc.data() as Playlist);
+            userPlaylistResult.listOfPlaylist.push({
+                ...doc.data(),
+                id: doc.id
+            } as Playlist);
         });
     
         return userPlaylistResult; 
@@ -42,6 +45,15 @@ export const getAllUserPlaylist = async(userUid: string) =>{
 }
 
 // loads a single user playlist 
+export const getSinglePlaylist = async(userUid: string, playlistId: string) =>{
+    try{
+        // const singlePlaylistResult: Playlist[];
+
+        const singlePlaylist = await getDocs(collection(db, "users", userUid, "playlist", playlistId));
+    }catch(error){
+        console.error("Error fetching single playlist", error);
+    }
+}
 
 // add a set to user playlist
 

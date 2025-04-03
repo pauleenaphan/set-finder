@@ -45,7 +45,7 @@ export default function SignupForm() {
     }
 
     return (
-        <main className="mb-40">
+        <main className="mb-40 mt-[8%]">
             <form onSubmit={() =>{ signUp("email") }} className="authForm flex flex-col gap-10 w-1/3 mx-auto">
                 <h1 className="text-4xl text-center leading-tight"> Welcome to Setfinder! </h1>
                 <div className="inputContainer">

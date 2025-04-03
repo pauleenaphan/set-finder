@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 
 import { getLikes } from "../api/likesAPI";
+import { getAllUserPlaylist } from "../api/playlistAPI";
 import { useAuth } from "../utils/fbAuth";
 import { SetData } from "@/types/setTypes";
 
@@ -11,11 +12,14 @@ import { SetList } from "@/components/setCardsTwo";
 import Modal from "@/components/modal";
 
 import { useRouter } from 'next/navigation';
+import { AllOfUserPlaylist } from "@/types/playlistTypes";
+import { UsersPlaylists } from "@/components/allPlaylist";
 
 export default function Library(){
     const router = useRouter();
     const [currTab, setCurrTab] = useState<string>("likes");
     const [userLikes, setUserLikes] = useState<SetData[]>([]); // temp string for now
+    const [allUserPlaylist, setAllUserPlaylist] = useState<AllOfUserPlaylist | null>();
     const [loggedInModal, setLoggedInModal] = useState<boolean>(false);
 
     const { user } = useAuth(); 
@@ -28,9 +32,11 @@ export default function Library(){
         if(localStorage.getItem("setFinderIsLogged") === "false"){
             setLoggedInModal(true);
         }
-        if (currTab === "likes" && user) {
+        if(currTab === "likes" && user){
             // Ensure getLikes returns the correct type
             getLikes(user.uid).then((likes) => setUserLikes(likes));
+        }else if(currTab === "playlist" && user){
+            getAllUserPlaylist(user.uid).then((playlist) => setAllUserPlaylist(playlist || null));
         }
     }, [currTab, user]);
 
@@ -67,7 +73,12 @@ export default function Library(){
                 </section>
                 
             ) : (
-                <p className="caption">Displaying Playlist</p>
+                <section>
+                    <UsersPlaylists
+                        listOfPlaylist={allUserPlaylist?.listOfPlaylist || []}
+                    />
+                        
+                </section>
             )}
         </main>
     )

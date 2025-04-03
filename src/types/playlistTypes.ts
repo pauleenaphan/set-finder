@@ -8,6 +8,7 @@ export interface AllOfUserPlaylist{
 
 // single playlist 
 export interface Playlist{
+    id?: string;
     name: string;
     description: string;
     dateCreated?: string;

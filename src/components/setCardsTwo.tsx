@@ -38,9 +38,9 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
     // Settings for aos animations
     useEffect(() =>{
         AOS.init({
-            duration: 400,  
+            duration: 500,  
             easing: 'ease-in-out',  
-            once: true,  
+            once: false,  
             mirror: false,  
         });
     })
@@ -175,18 +175,16 @@ export const SetList: React.FC<SetCardResults> = ({ setResults, style }) => {
                             </div>
                         ))}
                         <div className="flex justify-between mt-6 gap-3 items-center">
-                            <button className="flex items-center gap-1 bg-lightGray rounded p-2 px-3"
+                            <button className="flex items-center gap-1 bg-lightGray rounded p-2"
                                 onMouseEnter={() =>{ hoveringPlaylist(true, set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id); }}
                                 onMouseLeave={() =>{ hoveringPlaylist(false, set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id); }}
                                 onClick={() =>{ /* open up modal for playlist input  */ console.log(hoverPlaylist.setId); setPlaylistModal(true) }}
                             >
                                 <FaPlus className='text-2xl'/>
                                 {/* slide in on hover */}
-                                { hoverPlaylist.hover ? (
-                                    <p className='tracking-wide text-[18px] font-semibold' data-aos="slide-right"
+                                { hoverPlaylist.hover && hoverPlaylist.setId === (set.platforms[1]?.id ? `${set.platforms[0].id}@${set.platforms[1].id}` : set.platforms[0].id) && (
+                                    <p className='tracking-wider text-[16px] font-semibold bg-lightGray pr-2' data-aos="fade-right"
                                     > Add to Playlist </p>
-                                ) : (
-                                    <div></div>
                                 )}
                             </button>
 

@@ -44,7 +44,7 @@ export default function LoginForm() {
     }
 
     return (
-        <main className="mb-40">
+        <main className="mb-40 mt-[8%]">
             <form onSubmit={() => { signIn("email") }}
                 className="authForm flex flex-col gap-10 w-1/3 mx-auto">
                 <h1 className="text-4xl text-center"> Welcome Back!</h1>
